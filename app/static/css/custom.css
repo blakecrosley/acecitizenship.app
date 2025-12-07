@@ -1,0 +1,270 @@
+/* Ace Citizenship - Custom Theme
+   Matching iOS app design system */
+
+:root {
+    /* Light mode (default) */
+    --ace-primary: #7AA4F7;
+    --ace-secondary: #242839;
+    --ace-success: #73D9CA;
+    --ace-error: #F67590;
+    --ace-background: #F5F5F5;
+    --ace-surface: #E5E5E5;
+    --ace-text-primary: #242839;
+    --ace-text-secondary: #33374A;
+    --ace-disabled: #999BB3;
+
+    /* Bootstrap overrides */
+    --bs-primary: var(--ace-primary);
+    --bs-body-bg: var(--ace-background);
+    --bs-body-color: var(--ace-text-primary);
+    --bs-link-color: var(--ace-primary);
+}
+
+[data-theme="dark"] {
+    --ace-primary: #7AA4F7;
+    --ace-secondary: #F5F5F5;
+    --ace-success: #73D9CA;
+    --ace-error: #F67590;
+    --ace-background: #1B1D25;
+    --ace-surface: #191A1F;
+    --ace-text-primary: #BFC7F5;
+    --ace-text-secondary: #BFC7F5;
+    --ace-disabled: #575D8A;
+
+    --bs-body-bg: var(--ace-background);
+    --bs-body-color: var(--ace-text-primary);
+}
+
+/* Typography - Rounded system fonts */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Rounded", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background-color: var(--ace-background);
+    color: var(--ace-text-primary);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+}
+
+/* Navbar */
+.navbar {
+    background-color: var(--ace-surface);
+    transition: background-color 0.3s ease;
+}
+
+.navbar-brand {
+    font-weight: 700;
+}
+
+.nav-link {
+    color: var(--ace-text-primary) !important;
+    font-weight: 500;
+}
+
+.nav-link:hover {
+    color: var(--ace-primary) !important;
+}
+
+/* Theme toggle button */
+.theme-toggle {
+    background: none;
+    border: 2px solid var(--ace-text-primary);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: var(--ace-text-primary);
+}
+
+.theme-toggle:hover {
+    background-color: var(--ace-primary);
+    border-color: var(--ace-primary);
+    color: white;
+}
+
+/* Logo switching */
+.logo-light {
+    display: block;
+}
+
+.logo-dark {
+    display: none;
+}
+
+[data-theme="dark"] .logo-light {
+    display: none;
+}
+
+[data-theme="dark"] .logo-dark {
+    display: block;
+}
+
+/* Cards and surfaces */
+.card {
+    background-color: var(--ace-surface);
+    border: none;
+    border-radius: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+/* Buttons */
+.btn-primary {
+    background-color: var(--ace-primary);
+    border-color: var(--ace-primary);
+    border-radius: 12px;
+    padding: 12px 24px;
+    font-weight: 600;
+}
+
+.btn-primary:hover {
+    background-color: #6894e7;
+    border-color: #6894e7;
+}
+
+.btn-outline-primary {
+    color: var(--ace-primary);
+    border-color: var(--ace-primary);
+    border-radius: 12px;
+    padding: 12px 24px;
+    font-weight: 600;
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--ace-primary);
+    color: white;
+}
+
+/* Hero section */
+.hero {
+    padding: 80px 0;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+}
+
+.hero .lead {
+    font-size: 1.25rem;
+    color: var(--ace-text-secondary);
+    margin-bottom: 2rem;
+}
+
+/* Features section */
+.features {
+    padding: 80px 0;
+}
+
+.feature-icon {
+    width: 64px;
+    height: 64px;
+    background-color: var(--ace-primary);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+.feature-card {
+    text-align: center;
+    padding: 2rem;
+}
+
+/* CTA section */
+.cta {
+    padding: 80px 0;
+    background-color: var(--ace-surface);
+    text-align: center;
+}
+
+/* Footer */
+.footer {
+    background-color: var(--ace-surface);
+    padding: 40px 0;
+    margin-top: auto;
+}
+
+.footer a {
+    color: var(--ace-text-secondary);
+    text-decoration: none;
+}
+
+.footer a:hover {
+    color: var(--ace-primary);
+}
+
+/* App Store badge */
+.app-store-badge {
+    height: 50px;
+    transition: transform 0.2s ease;
+}
+
+.app-store-badge:hover {
+    transform: scale(1.05);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2rem;
+    }
+
+    .hero {
+        padding: 40px 0;
+    }
+
+    .features {
+        padding: 40px 0;
+    }
+}
+
+/* Legal pages */
+.legal-content {
+    padding: 60px 0;
+}
+
+.legal-content h1 {
+    margin-bottom: 2rem;
+}
+
+.legal-content h2 {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+.legal-content p, .legal-content ul {
+    color: var(--ace-text-secondary);
+    line-height: 1.8;
+}
+
+/* Support page */
+.support-content {
+    padding: 60px 0;
+}
+
+.faq-item {
+    margin-bottom: 1.5rem;
+}
+
+.faq-question {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.faq-answer {
+    color: var(--ace-text-secondary);
+}

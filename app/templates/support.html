@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+
+{% block title %}Support{% endblock %}
+{% block description %}Get help with Ace Citizenship - FAQ, troubleshooting, and contact information.{% endblock %}
+
+{% block content %}
+<section class="support-content">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <h1>Support</h1>
+                <p class="lead text-muted">Have questions? We're here to help.</p>
+
+                <h2 class="mt-5">Frequently Asked Questions</h2>
+
+                <div class="faq-item">
+                    <p class="faq-question">How many questions are in the app?</p>
+                    <p class="faq-answer">
+                        Ace Citizenship includes all 128 official USCIS civics questions updated for 2025.
+                        These are the same questions used in the actual naturalization interview.
+                    </p>
+                </div>
+
+                <div class="faq-item">
+                    <p class="faq-question">How does spaced repetition work?</p>
+                    <p class="faq-answer">
+                        When you answer a question incorrectly, it goes back into the deck and will
+                        appear again later. This helps you focus on questions you need to practice
+                        more, making your study time more efficient.
+                    </p>
+                </div>
+
+                <div class="faq-item">
+                    <p class="faq-question">Why do I need to select my state?</p>
+                    <p class="faq-answer">
+                        Some civics questions ask about your state's senators, governor, and capital.
+                        By selecting your state, the app automatically fills in the correct answers
+                        for these location-specific questions.
+                    </p>
+                </div>
+
+                <div class="faq-item">
+                    <p class="faq-question">What about my U.S. Representative?</p>
+                    <p class="faq-answer">
+                        Unlike senators and governors which are state-wide, your representative
+                        depends on your specific congressional district. You'll need to enter
+                        your representative's name manually. You can find this information at
+                        <a href="https://www.house.gov/representatives/find-your-representative" target="_blank">house.gov</a>.
+                    </p>
+                </div>
+
+                <div class="faq-item">
+                    <p class="faq-question">Is the app really free?</p>
+                    <p class="faq-answer">
+                        Yes! Ace Citizenship is completely free to download and use. There are no
+                        in-app purchases or subscriptions required to access all features.
+                    </p>
+                </div>
+
+                <div class="faq-item">
+                    <p class="faq-question">How do I reset my progress?</p>
+                    <p class="faq-answer">
+                        You can restart your study session at any time from within the app.
+                        This will shuffle all questions and let you start fresh.
+                    </p>
+                </div>
+
+                <div class="faq-item">
+                    <p class="faq-question">Is my data private?</p>
+                    <p class="faq-answer">
+                        Yes. All your data (settings, progress, state selection) is stored locally
+                        on your device. We don't collect or transmit any personal information.
+                        See our <a href="/privacy">Privacy Policy</a> for details.
+                    </p>
+                </div>
+
+                <h2 class="mt-5">Still Need Help?</h2>
+                <p>
+                    If you have additional questions, feedback, or found a bug, please reach out:
+                </p>
+
+                <div class="card p-4 mt-3">
+                    <p class="mb-2"><strong>Email:</strong></p>
+                    <p class="mb-0">
+                        <a href="mailto:support@acecitizenship.app">support@acecitizenship.app</a>
+                    </p>
+                </div>
+
+                <div class="mt-5">
+                    <a href="https://apps.apple.com/us/app/ace-citizenship/id6532592671" target="_blank" class="btn btn-primary">
+                        Download on the App Store
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
