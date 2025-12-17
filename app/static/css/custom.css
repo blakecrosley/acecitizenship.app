@@ -24,15 +24,15 @@
 
 [data-theme="dark"] {
     --ace-primary: #7AA4F7;
-    --ace-primary-text: #7AA4F7; /* Same in dark mode - already good contrast */
+    --ace-primary-text: #7AA4F7;
     --ace-secondary: #F5F5F5;
     --ace-success: #73D9CA;
     --ace-error: #F67590;
-    --ace-background: #1B1D25;
-    --ace-surface: #252830;
-    --ace-surface-border: rgba(255, 255, 255, 0.08);
-    --ace-text-primary: #BFC7F5;
-    --ace-text-secondary: #BFC7F5;
+    --ace-background: #121318;
+    --ace-surface: #1E2028;
+    --ace-surface-border: rgba(255, 255, 255, 0.1);
+    --ace-text-primary: #E8EAF6;
+    --ace-text-secondary: #A0A4B8;
     --ace-disabled: #575D8A;
 
     --bs-body-bg: var(--ace-background);
@@ -71,6 +71,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .navbar-brand {
     font-weight: 700;
+    color: var(--ace-text-primary) !important;
 }
 
 .nav-link {
@@ -286,6 +287,12 @@ h1, h2, h3, h4, h5, h6 {
     background-color: var(--ace-surface);
     padding: 40px 0;
     margin-top: auto;
+}
+
+.footer-brand {
+    font-weight: 700;
+    font-size: 1.125rem;
+    color: var(--ace-text-primary);
 }
 
 .footer h6 {

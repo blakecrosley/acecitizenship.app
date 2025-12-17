@@ -3,7 +3,7 @@
 # Ace Citizenship Marketing Site - Development Server
 # Usage: ./run.sh [start|stop|restart|status]
 
-PORT=8080
+PORT=8001
 PID_FILE=".server.pid"
 LOG_FILE=".server.log"
 VENV_DIR=".venv"
