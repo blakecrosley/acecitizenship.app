@@ -4,11 +4,13 @@
 :root {
     /* Light mode (default) */
     --ace-primary: #7AA4F7;
+    --ace-primary-text: #4A7FD9; /* Darker for text - WCAG AA compliant */
     --ace-secondary: #242839;
     --ace-success: #73D9CA;
     --ace-error: #F67590;
     --ace-background: #F5F5F5;
-    --ace-surface: #E5E5E5;
+    --ace-surface: #FFFFFF; /* White cards on gray background for better figure-ground */
+    --ace-surface-border: rgba(0, 0, 0, 0.06);
     --ace-text-primary: #242839;
     --ace-text-secondary: #33374A;
     --ace-disabled: #999BB3;
@@ -17,22 +19,25 @@
     --bs-primary: var(--ace-primary);
     --bs-body-bg: var(--ace-background);
     --bs-body-color: var(--ace-text-primary);
-    --bs-link-color: var(--ace-primary);
+    --bs-link-color: var(--ace-primary-text);
 }
 
 [data-theme="dark"] {
     --ace-primary: #7AA4F7;
+    --ace-primary-text: #7AA4F7; /* Same in dark mode - already good contrast */
     --ace-secondary: #F5F5F5;
     --ace-success: #73D9CA;
     --ace-error: #F67590;
     --ace-background: #1B1D25;
-    --ace-surface: #191A1F;
+    --ace-surface: #252830;
+    --ace-surface-border: rgba(255, 255, 255, 0.08);
     --ace-text-primary: #BFC7F5;
     --ace-text-secondary: #BFC7F5;
     --ace-disabled: #575D8A;
 
     --bs-body-bg: var(--ace-background);
     --bs-body-color: var(--ace-text-primary);
+    --bs-link-color: var(--ace-primary-text);
 }
 
 /* Typography - Rounded system fonts */
@@ -45,6 +50,17 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
     font-weight: 700;
+    color: var(--ace-text-primary);
+}
+
+/* Override Bootstrap's text-muted for proper contrast */
+.text-muted {
+    color: var(--ace-text-secondary) !important;
+}
+
+/* Secondary text class for descriptions */
+.text-secondary-custom {
+    color: var(--ace-text-secondary);
 }
 
 /* Navbar */
@@ -107,14 +123,17 @@ h1, h2, h3, h4, h5, h6 {
 /* Cards and surfaces */
 .card {
     background-color: var(--ace-surface);
-    border: none;
+    border: 1px solid var(--ace-surface-border);
     border-radius: 16px;
-    transition: background-color 0.3s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    transition: transform 200ms cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 200ms cubic-bezier(0.4, 0, 0.2, 1),
+                background-color 0.3s ease;
 }
 
 .card:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
 }
 
 /* Buttons */
@@ -146,19 +165,42 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Hero section */
 .hero {
-    padding: 80px 0;
-    text-align: center;
+    padding: 100px 0;
 }
 
 .hero h1 {
-    font-size: 3rem;
+    font-size: 3.5rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
     margin-bottom: 1.5rem;
+    color: var(--ace-text-primary);
 }
 
 .hero .lead {
     font-size: 1.25rem;
+    line-height: 1.7;
     color: var(--ace-text-secondary);
     margin-bottom: 2rem;
+    max-width: 480px;
+}
+
+/* Hero mascot */
+.hero-mascot {
+    position: relative;
+}
+
+.mascot-image {
+    max-width: 280px;
+    width: 100%;
+    height: auto;
+    filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.15));
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
 }
 
 /* Features section */
@@ -167,15 +209,35 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .feature-icon {
-    width: 64px;
-    height: 64px;
+    width: 56px;
+    height: 56px;
     background-color: var(--ace-primary);
-    border-radius: 16px;
+    border-radius: 14px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 1rem;
+    margin-bottom: 1.25rem;
+    color: white;
+}
+
+.feature-icon span {
     font-size: 1.5rem;
+    line-height: 1;
+}
+
+/* Feature icon color variants */
+.feature-icon--primary { background-color: var(--ace-primary); }
+.feature-icon--success { background-color: var(--ace-success); }
+.feature-icon--error { background-color: var(--ace-error); }
+.feature-icon--dark { background-color: var(--ace-secondary); }
+.feature-icon--gradient {
+    background: linear-gradient(135deg, var(--ace-background), var(--ace-secondary));
+    color: var(--ace-text-primary);
+}
+
+[data-theme="dark"] .feature-icon--gradient {
+    background: linear-gradient(135deg, #3a3d4a, #1B1D25);
+    color: var(--ace-text-primary);
 }
 
 .feature-card {
@@ -183,11 +245,40 @@ h1, h2, h3, h4, h5, h6 {
     padding: 2rem;
 }
 
+.feature-card h5 {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--ace-text-primary);
+    margin-bottom: 0.75rem;
+}
+
+.feature-card p {
+    color: var(--ace-text-secondary);
+    line-height: 1.6;
+    margin-bottom: 0;
+}
+
 /* CTA section */
 .cta {
-    padding: 80px 0;
+    padding: 100px 0;
     background-color: var(--ace-surface);
+    border-top: 1px solid var(--ace-surface-border);
+    border-bottom: 1px solid var(--ace-surface-border);
     text-align: center;
+}
+
+.cta h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: var(--ace-text-primary);
+    margin-bottom: 1rem;
+}
+
+.cta p {
+    color: var(--ace-text-secondary);
+    font-size: 1.125rem;
+    line-height: 1.6;
 }
 
 /* Footer */
@@ -195,6 +286,14 @@ h1, h2, h3, h4, h5, h6 {
     background-color: var(--ace-surface);
     padding: 40px 0;
     margin-top: auto;
+}
+
+.footer h6 {
+    color: var(--ace-text-primary);
+}
+
+.footer p {
+    color: var(--ace-text-secondary);
 }
 
 .footer a {
@@ -219,15 +318,28 @@ h1, h2, h3, h4, h5, h6 {
 /* Responsive */
 @media (max-width: 768px) {
     .hero h1 {
-        font-size: 2rem;
+        font-size: 2.25rem;
+        letter-spacing: -0.01em;
     }
 
     .hero {
-        padding: 40px 0;
+        padding: 60px 0;
+    }
+
+    .hero .lead {
+        max-width: 100%;
     }
 
     .features {
-        padding: 40px 0;
+        padding: 60px 0;
+    }
+
+    .cta {
+        padding: 60px 0;
+    }
+
+    .cta h2 {
+        font-size: 1.5rem;
     }
 }
 
@@ -267,4 +379,40 @@ h1, h2, h3, h4, h5, h6 {
 
 .faq-answer {
     color: var(--ace-text-secondary);
+}
+
+/* Focus states for keyboard accessibility */
+:focus-visible {
+    outline: 2px solid var(--ace-primary);
+    outline-offset: 2px;
+}
+
+.btn-primary:focus-visible,
+.btn-outline-primary:focus-visible {
+    outline: 2px solid var(--ace-primary);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 4px rgba(122, 164, 247, 0.25);
+}
+
+.theme-toggle:focus-visible {
+    outline: 2px solid var(--ace-primary);
+    outline-offset: 2px;
+}
+
+.nav-link:focus-visible {
+    outline: 2px solid var(--ace-primary);
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+.footer a:focus-visible {
+    outline: 2px solid var(--ace-primary);
+    outline-offset: 2px;
+    border-radius: 2px;
+}
+
+.app-store-badge:focus-visible {
+    outline: 2px solid var(--ace-primary);
+    outline-offset: 4px;
+    border-radius: 8px;
 }

@@ -1,13 +1,13 @@
 <section class="hero">
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-8">
+        <div class="row align-items-center justify-content-center">
+            <div class="col-lg-6 text-center text-lg-start">
                 <h1>Ace Your U.S. Citizenship Test</h1>
                 <p class="lead">
                     Prepare for your USCIS naturalization interview with all 128 official civics questions.
                     Study smarter with spaced repetition and instant feedback.
                 </p>
-                <div class="d-flex justify-content-center gap-3 flex-wrap">
+                <div class="d-flex justify-content-center justify-content-lg-start gap-3 flex-wrap">
                     <a href="https://apps.apple.com/us/app/ace-citizenship/id6532592671" target="_blank">
                         <img
                             src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
@@ -15,6 +15,15 @@
                             class="app-store-badge"
                         >
                     </a>
+                </div>
+            </div>
+            <div class="col-lg-4 text-center mt-5 mt-lg-0">
+                <div class="hero-mascot">
+                    <img
+                        src="{{ url_for('static', path='images/statue-happy.png') }}"
+                        alt="Ace Citizenship mascot"
+                        class="mascot-image"
+                    >
                 </div>
             </div>
         </div>

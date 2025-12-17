@@ -25,8 +25,8 @@
                 @click="theme = theme === 'dark' ? 'light' : 'dark'; localStorage.setItem('theme', theme)"
                 :title="theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'"
             >
-                <span x-show="theme === 'light'">&#9790;</span>
-                <span x-show="theme === 'dark'">&#9728;</span>
+                <span x-show="theme === 'light'">🌙</span>
+                <span x-show="theme === 'dark'">☀️</span>
             </button>
         </div>
     </div>
