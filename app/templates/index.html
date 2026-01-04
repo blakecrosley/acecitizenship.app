@@ -3,6 +3,69 @@
 {% block title %}Ace Citizenship{% endblock %}
 {% block description %}Prepare for your U.S. citizenship test with Ace Citizenship. All 128 official USCIS civics questions with spaced repetition learning. Free on the App Store.{% endblock %}
 
+{% block head %}
+<!-- Organization Schema -->
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Ace Citizenship",
+    "url": "https://acecitizenship.app",
+    "logo": "https://acecitizenship.app/static/images/app-icon.jpg",
+    "description": "U.S. citizenship test preparation app with all 128 official USCIS civics questions and spaced repetition learning.",
+    "sameAs": [
+        "https://apps.apple.com/us/app/ace-citizenship/id6532592671"
+    ],
+    "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "customer support",
+        "url": "https://acecitizenship.app/support"
+    }
+}
+</script>
+<!-- WebSite Schema with SearchAction -->
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Ace Citizenship",
+    "url": "https://acecitizenship.app",
+    "description": "Prepare for your U.S. citizenship test with all 128 official USCIS civics questions.",
+    "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://acecitizenship.app/blog?q={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+    }
+}
+</script>
+<!-- MobileApplication Schema -->
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "MobileApplication",
+    "name": "Ace Citizenship",
+    "operatingSystem": "iOS",
+    "applicationCategory": "EducationalApplication",
+    "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+    },
+    "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "5",
+        "ratingCount": "1"
+    },
+    "description": "Study for your U.S. citizenship test with all 128 official USCIS civics questions. Features spaced repetition learning and progress tracking.",
+    "downloadUrl": "https://apps.apple.com/us/app/ace-citizenship/id6532592671",
+    "screenshot": "https://acecitizenship.app/static/images/og-image.jpg"
+}
+</script>
+{% endblock %}
+
 {% block content %}
 {% include "components/hero.html" %}
 {% include "components/features.html" %}

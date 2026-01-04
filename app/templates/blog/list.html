@@ -27,6 +27,22 @@
     }
 }
 </script>
+<!-- ItemList Schema for Blog Posts -->
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "itemListElement": [
+        {% for post in posts %}
+        {
+            "@type": "ListItem",
+            "position": {{ loop.index + ((page - 1) * per_page) }},
+            "url": "https://acecitizenship.app/blog/{{ post.slug }}"
+        }{% if not loop.last %},{% endif %}
+        {% endfor %}
+    ]
+}
+</script>
 {% endblock %}
 
 {% block content %}

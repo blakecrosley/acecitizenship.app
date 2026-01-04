@@ -47,6 +47,7 @@ async def blog_index(
             "request": request,
             "posts": posts,
             "page": page,
+            "per_page": POSTS_PER_PAGE,
             "total_pages": total_pages,
             "total": total,
             "search_query": q or ""
@@ -100,9 +101,19 @@ async def blog_post(request: Request, slug: str, db: Session = Depends(get_db)):
 
     related_posts = posts_service.get_related_posts(db, post.id, limit=3)
 
+    # Extract FAQ items from post content for Schema.org FAQPage markup
+    faq_items = []
+    if post.content_html:
+        faq_items = posts_service.extract_faq_items(post.content_html)
+
     response = templates.TemplateResponse(
         "blog/post.html",
-        {"request": request, "post": post, "related_posts": related_posts}
+        {
+            "request": request,
+            "post": post,
+            "related_posts": related_posts,
+            "faq_items": faq_items
+        }
     )
     response.headers["Cache-Control"] = "public, max-age=300"
     return response

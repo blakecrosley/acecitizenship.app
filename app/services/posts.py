@@ -44,6 +44,57 @@ def compute_checksum(content: str) -> str:
     return hashlib.sha256(content.encode()).hexdigest()
 
 
+def extract_faq_items(content_html: str, max_items: int = 10) -> list[dict]:
+    """
+    Extract FAQ items from HTML content for Schema.org FAQPage markup.
+
+    Looks for h2/h3 headers that are questions (end with ?) and pairs them
+    with the following paragraph text as answers.
+
+    Returns list of {"question": str, "answer": str} dicts.
+    """
+    import re
+
+    faq_items = []
+
+    # Pattern: h2 or h3 ending with ? followed by content until next h2/h3
+    # This regex finds question headers and captures their text
+    question_pattern = re.compile(
+        r'<h[23][^>]*>([^<]*\?)</h[23]>\s*<p>([^<]+(?:<[^/][^>]*>[^<]*</[^>]+>)*[^<]*)</p>',
+        re.IGNORECASE | re.DOTALL
+    )
+
+    # Simpler approach: find h2/h3 questions, then get next paragraph
+    header_pattern = re.compile(r'<h[23][^>]*>([^<]*\?)</h[23]>', re.IGNORECASE)
+    headers = list(header_pattern.finditer(content_html))
+
+    for match in headers[:max_items]:
+        question = match.group(1).strip()
+        # Find the content after this header until the next header
+        start_pos = match.end()
+        next_header = re.search(r'<h[1-6]', content_html[start_pos:], re.IGNORECASE)
+        end_pos = start_pos + next_header.start() if next_header else len(content_html)
+
+        answer_section = content_html[start_pos:end_pos]
+        # Extract text from paragraphs
+        para_pattern = re.compile(r'<p[^>]*>(.*?)</p>', re.IGNORECASE | re.DOTALL)
+        paras = para_pattern.findall(answer_section)
+
+        if paras:
+            # Clean HTML tags from answer
+            answer = ' '.join(paras[:2])  # Take first 2 paragraphs
+            answer = re.sub(r'<[^>]+>', '', answer).strip()
+            answer = ' '.join(answer.split())  # Normalize whitespace
+
+            if answer and len(answer) > 20:  # Skip very short answers
+                faq_items.append({
+                    "question": question,
+                    "answer": answer[:500]  # Limit answer length
+                })
+
+    return faq_items
+
+
 # =============================================================================
 # READ OPERATIONS
 # =============================================================================

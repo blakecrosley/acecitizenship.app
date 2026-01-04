@@ -4,7 +4,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from pathlib import Path
 
-from app.routes import pages, blog, admin, auth
+from app.routes import pages, blog, admin, auth, seo
 from app.db.database import init_db, SessionLocal
 from app.services import posts as posts_service
 
@@ -43,6 +43,7 @@ app.mount(
 templates = Jinja2Templates(directory=Path(__file__).parent / "templates")
 
 # Include routes
+app.include_router(seo.router)  # SEO routes first (sitemap, robots.txt)
 app.include_router(pages.router)
 app.include_router(blog.router)
 app.include_router(auth.router)
