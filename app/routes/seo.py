@@ -1,8 +1,9 @@
 """
 SEO routes for Ace Citizenship.
-Handles sitemap.xml, robots.txt, and other SEO-related endpoints.
+Handles sitemap.xml, robots.txt, AASA, and other SEO-related endpoints.
 """
 
+import json
 from datetime import datetime
 
 from fastapi import APIRouter, Depends
@@ -15,6 +16,11 @@ from app.services import posts as posts_service
 router = APIRouter(tags=["seo"])
 
 SITE_URL = "https://acecitizenship.app"
+
+# Apple App Site Association configuration
+TEAM_ID = "M4WTLM6RAQ"
+APP_BUNDLE_ID = "com.941apps.Ace-Citizenship"
+APP_CLIP_BUNDLE_ID = "com.941apps.Ace-Citizenship.Clip"
 
 
 @router.get("/sitemap.xml")
@@ -94,5 +100,37 @@ Crawl-delay: 1
 """
 
     response = Response(content=robots_txt.strip(), media_type="text/plain")
+    response.headers["Cache-Control"] = "public, max-age=86400"
+    return response
+
+
+@router.get("/.well-known/apple-app-site-association")
+async def apple_app_site_association():
+    """
+    Apple App Site Association file for Universal Links and App Clips.
+    Enables deep linking from web to app and App Clip experiences.
+    """
+    aasa = {
+        "applinks": {
+            "apps": [],
+            "details": [
+                {
+                    "appID": f"{TEAM_ID}.{APP_BUNDLE_ID}",
+                    "paths": ["*"]
+                }
+            ]
+        },
+        "appclips": {
+            "apps": [f"{TEAM_ID}.{APP_CLIP_BUNDLE_ID}"]
+        },
+        "webcredentials": {
+            "apps": [f"{TEAM_ID}.{APP_BUNDLE_ID}"]
+        }
+    }
+
+    response = Response(
+        content=json.dumps(aasa, indent=2),
+        media_type="application/json"
+    )
     response.headers["Cache-Control"] = "public, max-age=86400"
     return response
