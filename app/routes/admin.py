@@ -1,6 +1,6 @@
 """
 Admin routes for Ace Citizenship blog management.
-Protected by ACE_ADMIN_ENABLED environment variable.
+Protected by session-based authentication.
 """
 
 import os
@@ -13,23 +13,28 @@ from sqlalchemy.orm import Session
 from app.db.database import get_db
 from app.services import posts as posts_service
 from app.routes.pages import templates
+from app.routes.auth import get_current_admin
 
 router = APIRouter(prefix="/admin", tags=["admin"])
 
 
-def require_admin():
-    """Check if admin is enabled via environment variable."""
-    if os.getenv("ACE_ADMIN_ENABLED", "").lower() != "true":
-        raise HTTPException(status_code=404, detail="Not found")
+def require_admin(request: Request):
+    """Check if user is authenticated as admin."""
+    if not get_current_admin(request):
+        # Redirect to login with next URL
+        raise HTTPException(
+            status_code=302,
+            headers={"Location": f"/admin/login?next={request.url.path}"}
+        )
 
 
 @router.get("/posts")
 async def admin_posts(
     request: Request,
-    db: Session = Depends(get_db),
-    _: None = Depends(require_admin)
+    db: Session = Depends(get_db)
 ):
     """List all posts for admin."""
+    require_admin(request)
     posts = posts_service.list_posts(db)
     return templates.TemplateResponse(
         "admin/posts.html",
@@ -38,11 +43,9 @@ async def admin_posts(
 
 
 @router.get("/posts/new")
-async def admin_new_post(
-    request: Request,
-    _: None = Depends(require_admin)
-):
+async def admin_new_post(request: Request):
     """New post form."""
+    require_admin(request)
     return templates.TemplateResponse(
         "admin/edit.html",
         {"request": request, "post": None}
@@ -59,10 +62,10 @@ async def admin_create_post(
     featured_image: str = Form(""),
     seo_title: str = Form(""),
     seo_description: str = Form(""),
-    db: Session = Depends(get_db),
-    _: None = Depends(require_admin)
+    db: Session = Depends(get_db)
 ):
     """Create a new post."""
+    require_admin(request)
     existing = posts_service.get_post_by_slug(db, slug)
     if existing:
         return templates.TemplateResponse(
@@ -92,10 +95,10 @@ async def admin_create_post(
 async def admin_edit_post(
     request: Request,
     post_id: int,
-    db: Session = Depends(get_db),
-    _: None = Depends(require_admin)
+    db: Session = Depends(get_db)
 ):
     """Edit post form."""
+    require_admin(request)
     post = posts_service.get_post(db, post_id)
     if not post:
         raise HTTPException(status_code=404, detail="Post not found")
@@ -117,10 +120,10 @@ async def admin_update_post(
     featured_image: str = Form(""),
     seo_title: str = Form(""),
     seo_description: str = Form(""),
-    db: Session = Depends(get_db),
-    _: None = Depends(require_admin)
+    db: Session = Depends(get_db)
 ):
     """Update a post."""
+    require_admin(request)
     post = posts_service.get_post(db, post_id)
     if not post:
         raise HTTPException(status_code=404, detail="Post not found")
@@ -158,11 +161,12 @@ async def admin_update_post(
 
 @router.post("/posts/{post_id}/publish")
 async def admin_publish_post(
+    request: Request,
     post_id: int,
-    db: Session = Depends(get_db),
-    _: None = Depends(require_admin)
+    db: Session = Depends(get_db)
 ):
     """Publish a post."""
+    require_admin(request)
     post = posts_service.get_post(db, post_id)
     if not post:
         raise HTTPException(status_code=404, detail="Post not found")
@@ -173,11 +177,12 @@ async def admin_publish_post(
 
 @router.post("/posts/{post_id}/unpublish")
 async def admin_unpublish_post(
+    request: Request,
     post_id: int,
-    db: Session = Depends(get_db),
-    _: None = Depends(require_admin)
+    db: Session = Depends(get_db)
 ):
     """Unpublish a post."""
+    require_admin(request)
     post = posts_service.get_post(db, post_id)
     if not post:
         raise HTTPException(status_code=404, detail="Post not found")
@@ -188,12 +193,13 @@ async def admin_unpublish_post(
 
 @router.post("/posts/{post_id}/schedule")
 async def admin_schedule_post(
+    request: Request,
     post_id: int,
     scheduled_at: str = Form(...),
-    db: Session = Depends(get_db),
-    _: None = Depends(require_admin)
+    db: Session = Depends(get_db)
 ):
     """Schedule a post for future publication."""
+    require_admin(request)
     post = posts_service.get_post(db, post_id)
     if not post:
         raise HTTPException(status_code=404, detail="Post not found")
@@ -209,11 +215,12 @@ async def admin_schedule_post(
 
 @router.post("/posts/{post_id}/delete")
 async def admin_delete_post(
+    request: Request,
     post_id: int,
-    db: Session = Depends(get_db),
-    _: None = Depends(require_admin)
+    db: Session = Depends(get_db)
 ):
     """Delete a post."""
+    require_admin(request)
     post = posts_service.get_post(db, post_id)
     if not post:
         raise HTTPException(status_code=404, detail="Post not found")

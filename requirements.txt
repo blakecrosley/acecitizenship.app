@@ -5,3 +5,4 @@ python-multipart>=0.0.6
 sqlalchemy>=2.0.25
 python-frontmatter>=1.1.0
 markdown>=3.5.2
+itsdangerous>=2.1.0
