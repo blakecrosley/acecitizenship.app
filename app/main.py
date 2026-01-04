@@ -23,14 +23,14 @@ class SecurityHeadersMiddleware(BaseHTTPMiddleware):
         response.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"
         response.headers["Permissions-Policy"] = "geolocation=(), microphone=(), camera=()"
 
-        # Content Security Policy - allow CDN resources
+        # Content Security Policy - allow CDN resources and Cloudflare
         csp = (
             "default-src 'self'; "
-            "script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://unpkg.com; "
+            "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://unpkg.com https://static.cloudflareinsights.com; "
             "style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; "
             "img-src 'self' data: https:; "
             "font-src 'self' https://cdn.jsdelivr.net; "
-            "connect-src 'self'; "
+            "connect-src 'self' https://cloudflareinsights.com; "
             "frame-ancestors 'none'; "
             "base-uri 'self'; "
             "form-action 'self'"
