@@ -423,3 +423,235 @@ h1, h2, h3, h4, h5, h6 {
     outline-offset: 4px;
     border-radius: 8px;
 }
+
+/* =============================================================================
+   BLOG STYLES
+   ============================================================================= */
+
+/* Blog page */
+.blog-page {
+    min-height: 60vh;
+}
+
+.blog-header {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.search-input {
+    background-color: var(--ace-surface);
+    border: 1px solid var(--ace-surface-border);
+    color: var(--ace-text-primary);
+    border-radius: 12px;
+    padding: 12px 16px;
+}
+
+.search-input:focus {
+    background-color: var(--ace-surface);
+    border-color: var(--ace-primary);
+    color: var(--ace-text-primary);
+    box-shadow: 0 0 0 3px rgba(122, 164, 247, 0.15);
+}
+
+.search-input::placeholder {
+    color: var(--ace-disabled);
+}
+
+/* Post cards */
+.post-card-link {
+    display: block;
+    color: inherit;
+}
+
+.post-card {
+    height: 100%;
+}
+
+.post-card .card-body {
+    padding: 1.5rem;
+}
+
+.post-card .post-title {
+    color: var(--ace-text-primary);
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    line-height: 1.4;
+}
+
+.post-card .post-excerpt {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.post-card .post-meta {
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--ace-surface-border);
+}
+
+.post-card .post-image img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 16px 16px 0 0;
+}
+
+/* Single blog post */
+.blog-post {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.blog-post .post-header {
+    margin-bottom: 2rem;
+}
+
+.blog-post .post-featured-image img {
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+    border-radius: 16px;
+}
+
+/* Prose styles for blog content */
+.post-body.prose {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--ace-text-secondary);
+}
+
+.post-body.prose h2 {
+    font-size: 1.5rem;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--ace-text-primary);
+}
+
+.post-body.prose h3 {
+    font-size: 1.25rem;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+    color: var(--ace-text-primary);
+}
+
+.post-body.prose p {
+    margin-bottom: 1.5rem;
+}
+
+.post-body.prose ul, .post-body.prose ol {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+}
+
+.post-body.prose li {
+    margin-bottom: 0.5rem;
+}
+
+.post-body.prose a {
+    color: var(--ace-primary-text);
+    text-decoration: underline;
+}
+
+.post-body.prose a:hover {
+    color: var(--ace-primary);
+}
+
+.post-body.prose blockquote {
+    border-left: 4px solid var(--ace-primary);
+    padding-left: 1.5rem;
+    margin: 1.5rem 0;
+    font-style: italic;
+    color: var(--ace-text-secondary);
+}
+
+.post-body.prose code {
+    background-color: var(--ace-surface-border);
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+    font-size: 0.9em;
+}
+
+.post-body.prose pre {
+    background-color: var(--ace-secondary);
+    color: #f8f8f2;
+    padding: 1.5rem;
+    border-radius: 12px;
+    overflow-x: auto;
+    margin: 1.5rem 0;
+}
+
+.post-body.prose pre code {
+    background: none;
+    padding: 0;
+}
+
+/* Share section */
+.share-section {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+/* Related posts */
+.related-post-card {
+    color: var(--ace-text-primary);
+    transition: border-color 0.2s ease;
+}
+
+.related-post-card:hover {
+    border-color: var(--ace-primary);
+}
+
+.related-post-card .card-title {
+    color: var(--ace-text-primary);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+/* Back to top button */
+.back-to-top {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+/* Alpine.js cloak */
+[x-cloak] {
+    display: none !important;
+}
+
+/* Pagination */
+.pagination-nav .btn {
+    border-radius: 8px;
+    padding: 8px 16px;
+}
+
+/* No posts state */
+.no-posts {
+    padding: 4rem 0;
+}
+
+/* Admin styles */
+.admin-posts .table {
+    background-color: var(--ace-surface);
+}
+
+.admin-posts .table th {
+    color: var(--ace-text-primary);
+    border-color: var(--ace-surface-border);
+}
+
+.admin-posts .table td {
+    color: var(--ace-text-secondary);
+    border-color: var(--ace-surface-border);
+    vertical-align: middle;
+}
+
+.admin-edit textarea#content_md {
+    min-height: 400px;
+}

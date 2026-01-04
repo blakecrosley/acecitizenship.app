@@ -1,0 +1,114 @@
+# Ace Citizenship Blog SEO Strategy
+# Keyword targets and optimization guidelines
+
+primary_keywords:
+  - keyword: "citizenship test"
+    search_intent: "informational"
+    difficulty: "medium"
+    priority: "high"
+    notes: "Core topic - high volume, competitive"
+
+  - keyword: "USCIS civics test"
+    search_intent: "informational"
+    difficulty: "low"
+    priority: "high"
+    notes: "Specific, targeted audience"
+
+  - keyword: "naturalization test"
+    search_intent: "informational"
+    difficulty: "low"
+    priority: "high"
+    notes: "Official term, motivated searchers"
+
+  - keyword: "citizenship interview"
+    search_intent: "informational"
+    difficulty: "medium"
+    priority: "high"
+    notes: "Broader than just civics test"
+
+secondary_keywords:
+  - "100 civics questions"
+  - "citizenship test questions"
+  - "how to pass citizenship test"
+  - "citizenship test study guide"
+  - "naturalization interview"
+  - "USCIS 100 questions"
+  - "citizenship test prep"
+  - "N-400 interview"
+  - "become US citizen"
+  - "citizenship test 2026"
+
+long_tail_targets:
+  - "how to study for citizenship test"
+  - "citizenship test questions and answers"
+  - "what to expect at citizenship interview"
+  - "how many questions on citizenship test"
+  - "citizenship test pass rate"
+  - "how long to study for citizenship test"
+  - "citizenship test tips"
+  - "free citizenship test practice"
+  - "citizenship test reading and writing"
+
+content_optimization:
+  title_guidelines:
+    - "Include primary keyword naturally"
+    - "Front-load important terms"
+    - "Keep under 60 characters"
+    - "Make it compelling to click"
+
+  meta_description:
+    length: "150-160 characters"
+    include:
+      - "Primary keyword"
+      - "Clear value proposition"
+      - "Encouraging tone"
+
+  heading_structure:
+    h1: "One per page, includes primary keyword"
+    h2: "Section breaks, include secondary keywords"
+    h3: "Subsections, natural language"
+
+  internal_linking:
+    - "Link to related blog posts"
+    - "Link to app store when relevant"
+    - "2-3 internal links per 1000 words"
+
+schema_markup:
+  article:
+    - "@type: Article"
+    - "headline"
+    - "author (Blake Crosley)"
+    - "datePublished"
+    - "dateModified"
+    - "publisher (Ace Citizenship)"
+
+  how_to:
+    - "Use for step-by-step guides"
+    - "Study strategy articles"
+    - "Interview preparation guides"
+
+  faq:
+    - "Use for Q&A format articles"
+    - "Common questions posts"
+
+competitor_gaps:
+  opportunities:
+    - "In-depth civics explanations (not just Q&A)"
+    - "Reading/writing portion guides (underserved)"
+    - "Interview day walkthroughs"
+    - "State-specific information (senators, representatives)"
+    - "Study schedules and timelines"
+
+  avoid:
+    - "Generic 'tips to pass' (saturated)"
+    - "Fear-based content about failure rates"
+    - "Legal advice about immigration status"
+
+measurement:
+  track:
+    - "Organic traffic per post"
+    - "Keyword rankings for targets"
+    - "Time on page"
+    - "App Store clicks from blog"
+
+  review_cadence: "Monthly"

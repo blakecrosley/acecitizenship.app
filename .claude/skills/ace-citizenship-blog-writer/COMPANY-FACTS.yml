@@ -1,0 +1,56 @@
+# Ace Citizenship App Company Facts
+# Use these facts when relevant, but sparingly
+
+company:
+  name: "Ace Citizenship"
+  tagline: "Ace Your U.S. Citizenship Test"
+  website: "https://acecitizenship.app"
+  app_store: "https://apps.apple.com/app/ace-citizenship/id6740092743"
+  developer: "941 Apps LLC"
+
+product:
+  type: "U.S. citizenship test prep app"
+  design: "Clean, focused interface"
+  philosophy: "Study smarter with spaced repetition"
+  price: "Free to use"
+
+platforms:
+  - name: "iPhone"
+    notes: "Primary experience with all features"
+
+features:
+  core:
+    - "All 128 official USCIS questions"
+    - "100 civics questions with explanations"
+    - "28 reading and writing vocabulary sentences"
+    - "Spaced repetition for efficient learning"
+    - "Track your progress"
+    - "Study anywhere, anytime"
+  learning:
+    - "Focus on questions you need to practice"
+    - "Mark questions as learned when ready"
+    - "Review mode for final preparation"
+    - "No account required, data stays on device"
+
+target_audience:
+  primary:
+    - "Immigrants preparing for naturalization"
+    - "Green card holders ready to become citizens"
+    - "People studying for the civics test"
+  secondary:
+    - "Teachers helping citizenship students"
+    - "Community organizations supporting immigrants"
+    - "Families studying together"
+
+test_facts:
+  civics_questions: 100
+  questions_asked: 10
+  correct_needed: 6
+  reading_writing_vocabulary: 28
+  test_language: "English (with exceptions for 50/20 and 55/15 rules)"
+  simplified_test: "Available for 65+ with 20+ years residency"
+
+author:
+  name: "Blake Crosley"
+  role: "Creator"
+  bio: "App developer focused on building tools that help people achieve their goals."

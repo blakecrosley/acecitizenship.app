@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block title %}Admin - Posts{% endblock %}
+
+{% block content %}
+<section class="admin-posts py-5">
+    <div class="container">
+        <header class="d-flex justify-content-between align-items-center mb-4">
+            <h1 class="h2">Blog Posts</h1>
+            <a href="/admin/posts/new" class="btn btn-primary">+ New Post</a>
+        </header>
+
+        {% if posts %}
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Slug</th>
+                        <th>Status</th>
+                        <th>Published</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for post in posts %}
+                    <tr>
+                        <td>
+                            <a href="/admin/posts/{{ post.id }}/edit" class="text-decoration-none fw-medium">
+                                {{ post.title }}
+                            </a>
+                        </td>
+                        <td class="text-muted small">{{ post.slug }}</td>
+                        <td>
+                            {% if post.status == 'published' %}
+                            <span class="badge bg-success">Published</span>
+                            {% elif post.status == 'scheduled' %}
+                            <span class="badge bg-info">Scheduled</span>
+                            {% elif post.status == 'draft' %}
+                            <span class="badge bg-secondary">Draft</span>
+                            {% else %}
+                            <span class="badge bg-warning">{{ post.status }}</span>
+                            {% endif %}
+                        </td>
+                        <td class="text-muted small">
+                            {{ post.published_at.strftime('%Y-%m-%d') if post.published_at else '-' }}
+                        </td>
+                        <td>
+                            <a href="/admin/posts/{{ post.id }}/edit" class="btn btn-sm btn-outline-secondary">Edit</a>
+                            {% if post.status == 'published' %}
+                            <a href="/blog/{{ post.slug }}" class="btn btn-sm btn-outline-primary" target="_blank">View</a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <div class="text-center py-5">
+            <p class="text-muted">No posts yet.</p>
+            <a href="/admin/posts/new" class="btn btn-primary">Create your first post</a>
+        </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

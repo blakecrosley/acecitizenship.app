@@ -1,0 +1,138 @@
+{% extends "base.html" %}
+
+{% block title %}{% if post %}Edit Post{% else %}New Post{% endif %} - Admin{% endblock %}
+
+{% block content %}
+<section class="admin-edit py-5">
+    <div class="container">
+        <header class="mb-4">
+            <a href="/admin/posts" class="text-decoration-none text-muted mb-2 d-inline-block">&larr; Back to Posts</a>
+            <h1 class="h2">{% if post %}Edit Post{% else %}New Post{% endif %}</h1>
+        </header>
+
+        {% if error %}
+        <div class="alert alert-danger" role="alert">{{ error }}</div>
+        {% endif %}
+
+        {% if success %}
+        <div class="alert alert-success" role="alert">{{ success }}</div>
+        {% endif %}
+
+        <form method="post" action="{% if post %}/admin/posts/{{ post.id }}/edit{% else %}/admin/posts/new{% endif %}">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="mb-3">
+                        <label for="title" class="form-label">Title</label>
+                        <input type="text" class="form-control" id="title" name="title"
+                               value="{{ post.title if post else '' }}" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="slug" class="form-label">Slug</label>
+                        <input type="text" class="form-control" id="slug" name="slug"
+                               value="{{ post.slug if post else '' }}" required
+                               pattern="[a-z0-9-]+" title="Lowercase letters, numbers, and hyphens only">
+                        <div class="form-text">URL-friendly identifier (e.g., my-post-title)</div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="excerpt" class="form-label">Excerpt</label>
+                        <textarea class="form-control" id="excerpt" name="excerpt" rows="2">{{ post.excerpt if post else '' }}</textarea>
+                        <div class="form-text">Brief summary for post cards and SEO</div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="content_md" class="form-label">Content (Markdown)</label>
+                        <textarea class="form-control font-monospace" id="content_md" name="content_md"
+                                  rows="20" required>{{ post.content_md if post else '' }}</textarea>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title mb-3">Post Settings</h5>
+
+                            {% if post %}
+                            <div class="mb-3">
+                                <label class="form-label">Status</label>
+                                <div>
+                                    {% if post.status == 'published' %}
+                                    <span class="badge bg-success">Published</span>
+                                    {% elif post.status == 'scheduled' %}
+                                    <span class="badge bg-info">Scheduled</span>
+                                    {% else %}
+                                    <span class="badge bg-secondary">Draft</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                            <div class="d-grid gap-2 mb-3">
+                                {% if post.status != 'published' %}
+                                <button type="submit" formaction="/admin/posts/{{ post.id }}/publish"
+                                        class="btn btn-success">Publish</button>
+                                {% else %}
+                                <button type="submit" formaction="/admin/posts/{{ post.id }}/unpublish"
+                                        class="btn btn-outline-secondary">Unpublish</button>
+                                {% endif %}
+                            </div>
+
+                            {% if post.status != 'published' %}
+                            <div class="mb-3">
+                                <label for="scheduled_at" class="form-label">Schedule For</label>
+                                <input type="datetime-local" class="form-control" id="scheduled_at" name="scheduled_at">
+                                <button type="submit" formaction="/admin/posts/{{ post.id }}/schedule"
+                                        class="btn btn-sm btn-outline-info mt-2">Schedule</button>
+                            </div>
+                            {% endif %}
+                            {% endif %}
+
+                            <hr>
+
+                            <div class="mb-3">
+                                <label for="featured_image" class="form-label">Featured Image URL</label>
+                                <input type="url" class="form-control" id="featured_image" name="featured_image"
+                                       value="{{ post.featured_image if post else '' }}">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="seo_title" class="form-label">SEO Title</label>
+                                <input type="text" class="form-control" id="seo_title" name="seo_title"
+                                       value="{{ post.seo_title if post else '' }}">
+                                <div class="form-text">Optional override for page title</div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="seo_description" class="form-label">SEO Description</label>
+                                <textarea class="form-control" id="seo_description" name="seo_description"
+                                          rows="2">{{ post.seo_description if post else '' }}</textarea>
+                                <div class="form-text">Optional meta description</div>
+                            </div>
+
+                            <hr>
+
+                            <div class="d-grid gap-2">
+                                <button type="submit" class="btn btn-primary">Save Changes</button>
+                                {% if post %}
+                                <a href="/blog/{{ post.slug }}" class="btn btn-outline-secondary" target="_blank">
+                                    Preview
+                                </a>
+                                {% endif %}
+                            </div>
+
+                            {% if post %}
+                            <hr>
+                            <button type="submit" formaction="/admin/posts/{{ post.id }}/delete"
+                                    class="btn btn-outline-danger w-100"
+                                    onclick="return confirm('Are you sure you want to delete this post?')">
+                                Delete Post
+                            </button>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+{% endblock %}
