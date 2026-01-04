@@ -132,4 +132,4 @@ Start with the official USCIS materials, practice a little each day, and approac
 
 If you're looking for a convenient way to study, Ace Citizenship includes all 128 official USCIS questions with spaced repetition to help you focus on what you need to learn most.
 
-[Download Ace Citizenship](https://apps.apple.com/app/ace-citizenship/id6740092743)
+[Download Ace Citizenship](https://apps.apple.com/app/ace-citizenship/id6532592671)

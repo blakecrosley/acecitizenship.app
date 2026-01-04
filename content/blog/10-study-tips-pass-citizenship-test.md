@@ -145,4 +145,4 @@ The test is designed to be achievable. USCIS wants you to succeed. Your dedicati
 
 If you want a convenient study tool, Ace Citizenship includes all official USCIS questions with spaced repetition built in, helping you focus on the questions you need to practice most.
 
-[Download Ace Citizenship](https://apps.apple.com/app/ace-citizenship/id6740092743)
+[Download Ace Citizenship](https://apps.apple.com/app/ace-citizenship/id6532592671)

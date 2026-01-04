@@ -47,7 +47,7 @@ Use at article end, once per piece maximum:
 
 > If you're looking for a free way to practice the citizenship test, Ace Citizenship includes all official USCIS questions with spaced repetition to help you focus on what you need to learn.
 >
-> [Download on the App Store](https://apps.apple.com/app/ace-citizenship/id6740092743)
+> [Download on the App Store](https://apps.apple.com/app/ace-citizenship/id6532592671)
 
 ## What NOT to Do
 
