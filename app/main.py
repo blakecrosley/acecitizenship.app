@@ -10,6 +10,22 @@ from app.db.database import init_db, SessionLocal
 from app.services import posts as posts_service
 
 
+class HeadRequestMiddleware(BaseHTTPMiddleware):
+    """Handle HEAD requests by converting them to GET and stripping the body.
+
+    FastAPI doesn't automatically support HEAD method for all routes.
+    This middleware ensures HEAD requests work for SEO tools like Googlebot.
+    """
+
+    async def dispatch(self, request: Request, call_next):
+        if request.method == "HEAD":
+            request.scope["method"] = "GET"
+            response = await call_next(request)
+            response.body = b""
+            return response
+        return await call_next(request)
+
+
 class SecurityHeadersMiddleware(BaseHTTPMiddleware):
     """Add security headers to all responses."""
 
@@ -63,7 +79,8 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
-# Security headers middleware
+# Middleware
+app.add_middleware(HeadRequestMiddleware)
 app.add_middleware(SecurityHeadersMiddleware)
 
 # Static files
