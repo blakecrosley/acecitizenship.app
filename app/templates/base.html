@@ -31,6 +31,69 @@
     <!-- RSS Feed -->
     <link rel="alternate" type="application/rss+xml" title="Ace Citizenship Blog" href="https://acecitizenship.app/blog/feed.xml">
 
+    <!-- Organization Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "941 Apps, LLC",
+        "url": "https://acecitizenship.app",
+        "logo": "https://acecitizenship.app/static/images/app-icon.jpg",
+        "description": "U.S. citizenship test preparation app"
+    }
+    </script>
+
+    <!-- WebSite Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Ace Citizenship",
+        "url": "https://acecitizenship.app",
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": {
+                "@type": "EntryPoint",
+                "urlTemplate": "https://acecitizenship.app/blog?q={search_term_string}"
+            },
+            "query-input": "required name=search_term_string"
+        }
+    }
+    </script>
+
+    <!-- SoftwareApplication Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Ace Citizenship",
+        "description": "Prepare for your U.S. citizenship test with all 128 official USCIS questions. Spaced repetition learning helps you remember effectively.",
+        "applicationCategory": "EducationalApplication",
+        "operatingSystem": "iOS, iPadOS",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD",
+            "availability": "https://schema.org/InStock"
+        },
+        "author": {
+            "@type": "Organization",
+            "name": "941 Apps, LLC"
+        },
+        "url": "https://acecitizenship.app",
+        "downloadUrl": "https://apps.apple.com/app/id6532592671",
+        "screenshot": "https://acecitizenship.app/static/images/og-image.png",
+        "featureList": [
+            "All 128 official USCIS civics questions",
+            "Spaced repetition learning algorithm",
+            "Progress tracking and statistics",
+            "Audio pronunciation for each question",
+            "App Clip for instant try before download"
+        ],
+        "keywords": "citizenship test, USCIS, naturalization, civics, immigration, study guide"
+    }
+    </script>
+
     <!-- Favicon -->
     <link rel="icon" type="image/jpeg" href="{{ url_for('static', path='images/app-icon.jpg') }}">
     <link rel="apple-touch-icon" href="{{ url_for('static', path='images/app-icon.jpg') }}">
@@ -50,9 +113,12 @@
     {% block head %}{% endblock %}
 </head>
 <body class="d-flex flex-column min-vh-100">
+    <!-- Skip to main content for accessibility -->
+    <a href="#main-content" class="skip-link visually-hidden-focusable">Skip to main content</a>
+
     {% include "components/navbar.html" %}
 
-    <main class="flex-grow-1">
+    <main id="main-content" class="flex-grow-1">
         {% block content %}{% endblock %}
     </main>
 
