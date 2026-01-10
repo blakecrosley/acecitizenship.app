@@ -1,0 +1,24 @@
+# Python/FastAPI
+__pycache__/
+.venv/
+venv/
+*.pyc
+.pytest_cache/
+htmlcov/
+.coverage
+
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+build/
+static/dist/
+
+# IDE
+.idea/
+*.swp
+
+# Misc
+.DS_Store
+*.log

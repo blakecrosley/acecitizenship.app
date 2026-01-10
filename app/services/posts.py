@@ -32,7 +32,7 @@ ALLOWED_TAGS = {
 }
 
 ALLOWED_ATTRIBUTES = {
-    "a": {"href", "title", "rel", "target"},
+    "a": {"href", "title", "target"},  # rel set via link_rel parameter
     "abbr": {"title"},
     "acronym": {"title"},
     "col": {"span"},
