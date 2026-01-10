@@ -81,22 +81,79 @@ async def sitemap(db: Session = Depends(get_db)):
 @router.get("/robots.txt")
 async def robots():
     """
-    Robots.txt file for search engine crawlers.
+    Robots.txt file for search engine and AI crawlers.
     """
     robots_txt = f"""# Ace Citizenship robots.txt
 # https://acecitizenship.app
+# Welcome to all search engines and AI crawlers
 
 User-agent: *
 Allow: /
-
-# Sitemap location
-Sitemap: {SITE_URL}/sitemap.xml
-
-# Disallow admin areas
 Disallow: /admin/
 
-# Crawl-delay for politeness
-Crawl-delay: 1
+# SEO Crawlers
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: Yandex
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+# AI Crawlers - Welcome
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Anthropic-ai
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+User-agent: meta-externalagent
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+Sitemap: {SITE_URL}/sitemap.xml
 """
 
     response = Response(content=robots_txt.strip(), media_type="text/plain")
