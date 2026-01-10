@@ -3,9 +3,12 @@ from fastapi import FastAPI, Request
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from starlette.middleware.base import BaseHTTPMiddleware
+from slowapi import _rate_limit_exceeded_handler
+from slowapi.errors import RateLimitExceeded
 from pathlib import Path
 
 from app.routes import pages, blog, admin, auth, seo
+from app.routes.auth import limiter  # Import rate limiter
 from app.db.database import init_db, SessionLocal
 from app.services import posts as posts_service
 
@@ -78,6 +81,10 @@ app = FastAPI(
     description="Prepare for your U.S. citizenship test",
     lifespan=lifespan,
 )
+
+# Rate limiter setup
+app.state.limiter = limiter
+app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
 # Middleware
 app.add_middleware(HeadRequestMiddleware)
