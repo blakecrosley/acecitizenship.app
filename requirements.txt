@@ -8,3 +8,4 @@ markdown>=3.5.2
 itsdangerous>=2.1.0
 slowapi>=0.1.9  # Rate limiting
 nh3>=0.2.14  # HTML sanitization
+httpx>=0.24.0
