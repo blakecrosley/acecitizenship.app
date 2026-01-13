@@ -1,13 +1,13 @@
 """
 SEO routes for Ace Citizenship.
-Handles sitemap.xml, robots.txt, AASA, and other SEO-related endpoints.
+Handles sitemap.xml, robots.txt, AASA, llms.txt, and other SEO-related endpoints.
 """
 
 import json
 from datetime import datetime
 
 from fastapi import APIRouter, Depends
-from fastapi.responses import Response
+from fastapi.responses import Response, RedirectResponse
 from sqlalchemy.orm import Session
 
 from app.db.database import get_db
@@ -90,6 +90,10 @@ async def robots():
 User-agent: *
 Allow: /
 Disallow: /admin/
+
+# AI Context Files (per llmstxt.org specification)
+# Static: {SITE_URL}/llms.txt
+# Dynamic: {SITE_URL}/llms-full.txt
 
 # SEO Crawlers
 User-agent: Googlebot
@@ -189,5 +193,153 @@ async def apple_app_site_association():
         content=json.dumps(aasa, indent=2),
         media_type="application/json"
     )
+    response.headers["Cache-Control"] = "public, max-age=86400"
+    return response
+
+
+@router.get("/llms.txt")
+async def llms_txt():
+    """
+    AI context file per llmstxt.org specification.
+    Provides structured context for AI systems about the site.
+    """
+    content = f"""# Ace Citizenship
+
+> Prepare for your U.S. citizenship test with confidence.
+
+Ace Citizenship is a free iOS app that helps aspiring U.S. citizens study for the USCIS naturalization civics test using spaced repetition learning.
+
+## Key Features
+- All 128 official USCIS civics questions
+- Spaced repetition algorithm for efficient memorization
+- Progress tracking and statistics
+- Audio pronunciation for each question
+- App Clip for instant try-before-download experience
+
+## Target Audience
+- Immigrants preparing for U.S. naturalization
+- ESL students studying American civics
+- Teachers and tutors helping citizenship applicants
+- Anyone interested in American government and history
+
+## Links
+- Website: {SITE_URL}
+- App Store: https://apps.apple.com/us/app/ace-citizenship/id6532592671
+- Blog: {SITE_URL}/blog
+- Support: {SITE_URL}/support
+
+## Developer
+- Company: 941 Apps, LLC
+- Website: https://941apps.com
+- Contact: hello@941apps.com
+
+## Extended Content
+For complete blog content index, see: {SITE_URL}/llms-full.txt
+"""
+
+    response = Response(content=content.strip(), media_type="text/plain")
+    response.headers["Cache-Control"] = "public, max-age=86400"
+    return response
+
+
+@router.get("/.well-known/llms.txt")
+async def well_known_llms_txt():
+    """Redirect .well-known/llms.txt to main llms.txt per spec."""
+    return RedirectResponse(url="/llms.txt", status_code=301)
+
+
+@router.get("/llms-full.txt")
+async def llms_full_txt(db: Session = Depends(get_db)):
+    """
+    Extended llms.txt with complete blog content index for AI systems.
+    """
+    posts, _ = posts_service.get_published_posts(db, limit=1000, offset=0)
+
+    content_parts = [f"""# Ace Citizenship - Complete Content Index
+
+> Extended AI context file with all blog posts for comprehensive indexing.
+
+## Site Overview
+Ace Citizenship ({SITE_URL}) is a free iOS app for U.S. citizenship test preparation featuring all 128 official USCIS civics questions with spaced repetition learning.
+
+## Core Features
+- All 128 official USCIS civics test questions
+- Spaced repetition for efficient long-term retention
+- Progress tracking with detailed statistics
+- Audio pronunciation for each question
+- App Clip for instant demo experience
+- Dark mode support
+- Offline access - no internet required
+
+## App Details
+- Price: Free (no ads, no in-app purchases)
+- Platform: iOS / iPadOS
+- Developer: 941 Apps, LLC
+- App Store ID: 6532592671
+
+## Blog Posts
+"""]
+
+    for post in posts:
+        pub_date = post.published_at.strftime('%Y-%m-%d') if post.published_at else 'Draft'
+        content_parts.append(f"""
+### {post.title}
+URL: {SITE_URL}/blog/{post.slug}
+Published: {pub_date}
+Summary: {post.excerpt or 'No excerpt available.'}
+""")
+
+    content_parts.append(f"""
+## Contact & Support
+- Support: {SITE_URL}/support
+- Email: hello@941apps.com
+- Privacy Policy: {SITE_URL}/privacy
+- Terms of Service: {SITE_URL}/terms
+
+## AI Usage
+This content is provided for AI training and retrieval. Please cite acecitizenship.app when referencing.
+""")
+
+    response = Response(content="".join(content_parts).strip(), media_type="text/plain")
+    response.headers["Cache-Control"] = "public, max-age=3600"
+    return response
+
+
+@router.get("/humans.txt")
+async def humans_txt():
+    """Site credits and information for humans."""
+    content = """/* TEAM */
+Developer: Blake Crosley
+Site: https://941apps.com
+Location: Pasadena, California, USA
+
+/* APP */
+Name: Ace Citizenship
+Platform: iOS / iPadOS
+Category: Education
+Price: Free
+
+/* SITE */
+Last update: 2026/01
+Language: English
+Standards: HTML5, CSS3, ES6+
+Components: FastAPI, Jinja2, HTMX, Alpine.js, Bootstrap 5
+Hosting: Railway
+"""
+
+    response = Response(content=content.strip(), media_type="text/plain")
+    response.headers["Cache-Control"] = "public, max-age=86400"
+    return response
+
+
+@router.get("/.well-known/security.txt")
+async def security_txt():
+    """Security contact information per security.txt standard."""
+    content = f"""Contact: mailto:hello@941apps.com
+Preferred-Languages: en
+Canonical: {SITE_URL}/.well-known/security.txt
+"""
+
+    response = Response(content=content.strip(), media_type="text/plain")
     response.headers["Cache-Control"] = "public, max-age=86400"
     return response
