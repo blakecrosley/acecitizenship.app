@@ -104,6 +104,23 @@ h1, h2, h3, h4, h5, h6 {
     color: white;
 }
 
+/* Theme toggle icons - show moon in light mode, sun in dark mode */
+.theme-icon-light {
+    display: inline;
+}
+
+.theme-icon-dark {
+    display: none;
+}
+
+[data-theme="dark"] .theme-icon-light {
+    display: none;
+}
+
+[data-theme="dark"] .theme-icon-dark {
+    display: inline;
+}
+
 /* Logo switching */
 .logo-light {
     display: block;

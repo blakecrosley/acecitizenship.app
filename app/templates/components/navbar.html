@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg sticky-top" x-data="{ theme: localStorage.getItem('theme') || 'light' }" x-init="$watch('theme', val => document.documentElement.setAttribute('data-theme', val))">
+<nav class="navbar navbar-expand-lg sticky-top">
     <div class="container">
         <a class="navbar-brand" href="/">
             🇺🇸 Ace Citizenship
@@ -22,13 +22,9 @@
             </ul>
 
             <!-- Theme toggle -->
-            <button
-                class="theme-toggle"
-                @click="theme = theme === 'dark' ? 'light' : 'dark'; localStorage.setItem('theme', theme)"
-                :title="theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'"
-            >
-                <span x-show="theme === 'light'">🌙</span>
-                <span x-show="theme === 'dark'">☀️</span>
+            <button class="theme-toggle" onclick="toggleTheme()" id="theme-toggle" title="Toggle theme">
+                <span class="theme-icon-light">🌙</span>
+                <span class="theme-icon-dark">☀️</span>
             </button>
         </div>
     </div>

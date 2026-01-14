@@ -1,16 +1,15 @@
 // Theme persistence and system preference detection
-document.addEventListener('DOMContentLoaded', function() {
-    // Check for saved theme preference or system preference
+(function() {
+    // Apply theme immediately to prevent flash
     const savedTheme = localStorage.getItem('theme');
     const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const theme = savedTheme || (systemPrefersDark ? 'dark' : 'light');
+    document.documentElement.setAttribute('data-theme', theme);
+    if (!savedTheme) localStorage.setItem('theme', theme);
+})();
 
-    if (!savedTheme) {
-        const theme = systemPrefersDark ? 'dark' : 'light';
-        localStorage.setItem('theme', theme);
-        document.documentElement.setAttribute('data-theme', theme);
-    }
-
-    // Listen for system theme changes
+document.addEventListener('DOMContentLoaded', function() {
+    // Listen for system theme changes (only if no saved preference)
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
         if (!localStorage.getItem('theme')) {
             const theme = e.matches ? 'dark' : 'light';
@@ -19,10 +18,10 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// Toggle theme function (called from Alpine.js)
+// Toggle theme function
 function toggleTheme() {
     const html = document.documentElement;
-    const currentTheme = html.getAttribute('data-theme');
+    const currentTheme = html.getAttribute('data-theme') || 'light';
     const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
     html.setAttribute('data-theme', newTheme);
     localStorage.setItem('theme', newTheme);
