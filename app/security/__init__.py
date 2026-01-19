@@ -7,6 +7,8 @@ from app.security.kv_rate_limit import (
     RateLimitContext,
     KVRateLimiter,
 )
+from app.security.logging import SecurityLogMiddleware
+from app.security.axiom import get_axiom_client, AxiomClient, SecurityEvent
 
 __all__ = [
     "SecurityHeadersMiddleware",
@@ -15,4 +17,8 @@ __all__ = [
     "rate_limit_auth_kv",
     "RateLimitContext",
     "KVRateLimiter",
+    "SecurityLogMiddleware",
+    "get_axiom_client",
+    "AxiomClient",
+    "SecurityEvent",
 ]
