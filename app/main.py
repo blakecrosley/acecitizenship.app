@@ -13,6 +13,7 @@ from app.db.database import init_db, SessionLocal
 from app.services import posts as posts_service
 from app.security.headers import SecurityHeadersMiddleware
 from app.security.logging import SecurityLogMiddleware
+from app.security.rate_limit import RateLimitMiddleware
 
 
 class HeadRequestMiddleware(BaseHTTPMiddleware):
@@ -61,6 +62,7 @@ app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 # Middleware
 app.add_middleware(HeadRequestMiddleware)
 app.add_middleware(SecurityHeadersMiddleware)
+app.add_middleware(RateLimitMiddleware)
 app.add_middleware(SecurityLogMiddleware, site_name="acecitizenship.app")
 
 # Static files

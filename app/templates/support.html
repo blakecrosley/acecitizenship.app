@@ -3,6 +3,73 @@
 {% block title %}Support{% endblock %}
 {% block description %}Get help with Ace Citizenship - FAQ, troubleshooting, and contact information.{% endblock %}
 
+{% block head %}
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+            "@type": "Question",
+            "name": "How many questions are in the app?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Ace Citizenship includes all 128 official USCIS civics questions updated for 2025. These are the same questions used in the actual naturalization interview."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "How does spaced repetition work?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "When you answer a question incorrectly, it goes back into the deck and will appear again later. This helps you focus on questions you need to practice more, making your study time more efficient."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Why do I need to select my state?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Some civics questions ask about your state's senators, governor, and capital. By selecting your state, the app automatically fills in the correct answers for these location-specific questions."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "What about my U.S. Representative?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Unlike senators and governors which are state-wide, your representative depends on your specific congressional district. You'll need to enter your representative's name manually. You can find this information at house.gov."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Is the app really free?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes! Ace Citizenship is completely free to download and use. There are no in-app purchases or subscriptions required to access all features."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "How do I reset my progress?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "You can restart your study session at any time from within the app. This will shuffle all questions and let you start fresh."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Is my data private?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. All your data (settings, progress, state selection) is stored locally on your device. We don't collect or transmit any personal information."
+            }
+        }
+    ]
+}
+</script>
+{% endblock %}
+
 {% block content %}
 <section class="support-content">
     <div class="container">

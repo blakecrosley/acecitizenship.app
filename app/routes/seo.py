@@ -6,9 +6,13 @@ Handles sitemap.xml, robots.txt, AASA, llms.txt, and other SEO-related endpoints
 import json
 from datetime import datetime
 
+from pathlib import Path
+
 from fastapi import APIRouter, Depends
-from fastapi.responses import Response, RedirectResponse
+from fastapi.responses import Response, RedirectResponse, FileResponse
 from sqlalchemy.orm import Session
+
+APP_DIR = Path(__file__).parent.parent
 
 from app.db.database import get_db
 from app.services import posts as posts_service
@@ -199,47 +203,13 @@ async def apple_app_site_association():
 
 @router.get("/llms.txt")
 async def llms_txt():
-    """
-    AI context file per llmstxt.org specification.
-    Provides structured context for AI systems about the site.
-    """
-    content = f"""# Ace Citizenship
-
-> Prepare for your U.S. citizenship test with confidence.
-
-Ace Citizenship is a free iOS app that helps aspiring U.S. citizens study for the USCIS naturalization civics test using spaced repetition learning.
-
-## Key Features
-- All 128 official USCIS civics questions
-- Spaced repetition algorithm for efficient memorization
-- Progress tracking and statistics
-- Audio pronunciation for each question
-- App Clip for instant try-before-download experience
-
-## Target Audience
-- Immigrants preparing for U.S. naturalization
-- ESL students studying American civics
-- Teachers and tutors helping citizenship applicants
-- Anyone interested in American government and history
-
-## Links
-- Website: {SITE_URL}
-- App Store: https://apps.apple.com/us/app/ace-citizenship/id6532592671
-- Blog: {SITE_URL}/blog
-- Support: {SITE_URL}/support
-
-## Developer
-- Company: 941 Apps, LLC
-- Website: https://941apps.com
-- Contact: hello@941apps.com
-
-## Extended Content
-For complete blog content index, see: {SITE_URL}/llms-full.txt
-"""
-
-    response = Response(content=content.strip(), media_type="text/plain")
-    response.headers["Cache-Control"] = "public, max-age=86400"
-    return response
+    """AI context file per llmstxt.org specification."""
+    static_file = APP_DIR / "static" / "llms.txt"
+    return FileResponse(
+        static_file,
+        media_type="text/plain",
+        headers={"Cache-Control": "public, max-age=86400"},
+    )
 
 
 @router.get("/.well-known/llms.txt")

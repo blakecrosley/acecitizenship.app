@@ -1,0 +1,40 @@
+# Ace Citizenship
+
+> U.S. citizenship test preparation app for aspiring Americans
+
+## Overview
+
+Ace Citizenship helps immigrants prepare for the USCIS naturalization interview. Study the official 128 civics questions, practice English reading/writing, and prepare for your interview with confidence.
+
+## Key Features
+
+- 128 Official USCIS Civics Questions (M-1778 format, Dec 2025)
+- Spaced Repetition Learning for optimal retention
+- State-Specific Content: Senators, Governor, Representative auto-populated
+- Instant Feedback on answers
+- Progress Tracking with streaks and statistics
+- Light/Dark Mode support
+
+## The Civics Test
+
+During the naturalization interview, applicants answer 10 questions from the official pool and must get 6 correct. Questions cover:
+
+- American Government (Constitution, branches, rights)
+- American History (Colonial period, Civil War, civil rights)
+- Integrated Civics (Geography, symbols, holidays)
+
+## Pricing
+
+- Free: All 128 civics questions with core study features
+- One-Time Purchase: State-specific personalization and variations
+
+## Platforms
+
+- iOS (iPhone, iPad)
+- App Store ID: 6532592671
+
+## Contact
+
+- Website: https://acecitizenship.app
+- Developer: 941 Apps
+- Email: blake@941apps.com

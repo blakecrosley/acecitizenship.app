@@ -1,0 +1,143 @@
+# Ace Citizenship - Complete Documentation
+
+> Comprehensive U.S. citizenship test preparation platform helping immigrants achieve their American dream
+
+## Product Overview
+
+Ace Citizenship is a freemium iOS app and web platform designed to help aspiring U.S. citizens prepare for the USCIS naturalization interview. The app provides study tools for the official civics questions, English reading/writing practice, and interview preparation guidance.
+
+## The U.S. Citizenship Test
+
+### Test Format
+- 10 questions asked during naturalization interview
+- 6 correct answers required to pass
+- Questions drawn from official USCIS pool
+- Some questions have state-specific answers
+
+### Question Categories
+
+**American Government**
+- Principles of American democracy
+- System of government
+- Rights and responsibilities
+- The Constitution and amendments
+- Federal, state, and local government
+
+**American History**
+- Colonial period and independence
+- The Civil War and its effects
+- Recent American history
+- Civil rights movement
+- Important historical figures
+
+**Integrated Civics**
+- Geography (states, capitals, landmarks)
+- National symbols and holidays
+- Citizenship responsibilities
+
+## App Features
+
+### Study System
+- **128 Official Questions**: Complete USCIS M-1778 (09/25) question bank
+- **Spaced Repetition**: Optimized learning algorithm for retention
+- **Flashcard Mode**: Randomized questions with instant feedback
+- **Progress Dashboard**: Track questions attempted, correct answers, mastery level
+
+### Personalization
+- **State Selection**: Choose your state of residence
+- **Auto-Population**: Senators, Governor, Representative automatically inserted
+- **Adaptive Content**: Questions adjust to your location
+
+### User Experience
+- Light and dark mode support
+- Sound effects and haptic feedback
+- Streak tracking for motivation
+- First-time user onboarding carousel
+
+## Pricing Model
+
+### Free Tier
+- Access to all 128 civics questions
+- Core study features and flashcards
+- Progress tracking
+- Light/dark mode
+
+### One-Time Purchase
+- State-specific question variations
+- Advanced personalization features
+- No subscription required
+
+## Blog Content (28+ Articles)
+
+### Study Strategies
+- 30-day study plans
+- 10 tips for test success
+- Spaced repetition explained
+- Memory techniques
+
+### Test Sections
+- Civics questions breakdown
+- Reading test preparation
+- Writing test preparation
+- Interview checklist
+
+### Special Circumstances
+- 65/20 exception (simplified test for seniors)
+- ESL learner tips
+- Test anxiety management
+- Accommodations for disabilities
+
+### Procedural Guides
+- N-400 application walkthrough
+- Interview timeline expectations
+- Naturalization ceremony guide
+- Post-citizenship steps
+
+### Content Topics
+- Bill of Rights explained
+- Constitution overview
+- Three branches of government
+- Presidents and founding fathers
+- Federal holidays significance
+
+## Technical Architecture
+
+### iOS App
+- SwiftUI native interface
+- SwiftData for persistence
+- StoreKit for in-app purchases
+- AVFoundation for sounds/haptics
+
+### Web Platform
+- FastAPI backend
+- HTMX + Jinja2 templates
+- SQLAlchemy with SQLite
+- Markdown blog system
+- Admin panel for content
+
+### Hosting
+- iOS App Store (ID: 6532592671)
+- Web: Railway (FastAPI backend)
+
+## Target Audience
+
+- Immigrants preparing for naturalization interview
+- ESL students learning about U.S. government
+- Educators teaching civics
+- Anyone interested in U.S. citizenship requirements
+
+## Contact Information
+
+- Website: https://acecitizenship.app
+- Blog: https://acecitizenship.app/blog
+- Support: https://acecitizenship.app/support
+- Developer: 941 Apps (https://941apps.com)
+- Email: blake@941apps.com
+
+## Related Resources
+
+- Download: App Store (search "Ace Citizenship")
+- USCIS Official: https://uscis.gov
+- Study Materials: https://acecitizenship.app/study
+- FAQ: https://acecitizenship.app/faq
+- Privacy: https://acecitizenship.app/privacy

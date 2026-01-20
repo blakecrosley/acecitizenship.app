@@ -1,0 +1,111 @@
+{
+  "project": {
+    "name": "Ace Citizenship SEO/AIO Optimization",
+    "description": "SEO and AI Optimization improvements for acecitizenship.app US citizenship test prep"
+  },
+  "stories": [
+    {
+      "id": "seo-1",
+      "title": "Add FAQPage schema to support page",
+      "description": "Implement FAQPage structured data on support/FAQ sections",
+      "acceptance_criteria": [
+        "Create FAQ section with common user questions",
+        "Add FAQPage JSON-LD schema",
+        "Include questions about: test content, study methods, app features",
+        "Include questions about: N-400 interview, test updates",
+        "Validate with Rich Results Test"
+      ],
+      "priority": 1,
+      "passes": false,
+      "attempts": 0
+    },
+    {
+      "id": "seo-2",
+      "title": "Optimize flag.jpg image (3MB to responsive WebP)",
+      "description": "Compress and optimize the large flag image for better Core Web Vitals",
+      "acceptance_criteria": [
+        "Convert flag.jpg to WebP format",
+        "Create multiple sizes (400w, 800w, 1200w)",
+        "Implement srcset for responsive loading",
+        "Add width/height attributes to prevent CLS",
+        "Verify LCP improvement with Lighthouse"
+      ],
+      "priority": 1,
+      "passes": false,
+      "attempts": 0
+    },
+    {
+      "id": "aio-1",
+      "title": "Create llms.txt with civics content",
+      "description": "Create comprehensive llms.txt with US civics information for AI discoverability",
+      "acceptance_criteria": [
+        "Create /llms.txt with app overview",
+        "Create /llms-full.txt with detailed content",
+        "Include: all 100 civics questions and answers",
+        "Add study tips and test format information",
+        "Include N-400 interview preparation content"
+      ],
+      "priority": 1,
+      "passes": false,
+      "attempts": 0
+    },
+    {
+      "id": "seo-3",
+      "title": "Add Course/LearningResource schema",
+      "description": "Implement educational schema for the civics test content",
+      "acceptance_criteria": [
+        "Add Course JSON-LD schema to main pages",
+        "Include provider (941 Apps)",
+        "Add learning outcomes and prerequisites",
+        "Include estimated duration",
+        "Validate with Rich Results Test"
+      ],
+      "priority": 2,
+      "passes": false,
+      "attempts": 0
+    },
+    {
+      "id": "seo-4",
+      "title": "Create civics questions content pages",
+      "description": "Create SEO-optimized pages for each civics question category",
+      "acceptance_criteria": [
+        "Create page for American Government questions",
+        "Create page for American History questions",
+        "Create page for Integrated Civics questions",
+        "Add proper heading hierarchy and schema",
+        "Include internal links between categories"
+      ],
+      "priority": 2,
+      "passes": false,
+      "attempts": 0
+    },
+    {
+      "id": "aio-2",
+      "title": "Add Key Takeaways sections",
+      "description": "Add structured takeaways for AI parsing",
+      "acceptance_criteria": [
+        "Add Key Takeaways to features page",
+        "Add study tips summary section",
+        "Use semantic HTML structure",
+        "Include actionable test prep advice"
+      ],
+      "priority": 2,
+      "passes": false,
+      "attempts": 0
+    },
+    {
+      "id": "seo-5",
+      "title": "Implement Review schema",
+      "description": "Add AggregateRating schema from App Store reviews",
+      "acceptance_criteria": [
+        "Fetch current App Store rating",
+        "Add AggregateRating JSON-LD",
+        "Include review count and average",
+        "Update rating periodically"
+      ],
+      "priority": 3,
+      "passes": false,
+      "attempts": 0
+    }
+  ]
+}
