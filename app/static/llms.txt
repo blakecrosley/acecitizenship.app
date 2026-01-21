@@ -1,0 +1,49 @@
+# Ace Citizenship
+
+> Free iOS app for U.S. citizenship test preparation with all 128 official USCIS civics questions.
+
+For comprehensive information, see: [llms-full.txt](https://acecitizenship.app/llms-full.txt)
+
+## About
+
+Ace Citizenship is a free iOS app helping aspiring U.S. citizens prepare for the naturalization civics test. Features all 128 official USCIS questions with spaced repetition learning for efficient long-term retention.
+
+## Key Features
+
+- All 128 official USCIS civics test questions
+- Spaced repetition algorithm for optimal memorization
+- Progress tracking with detailed statistics
+- Audio pronunciation for each question
+- App Clip for instant demo experience
+- Dark mode support
+- Offline access - no internet required
+- 100% free - no ads, no in-app purchases
+
+## App Details
+
+- **Platform**: iOS / iPadOS
+- **Price**: Free
+- **Developer**: 941 Apps, LLC
+- **App Store**: [Download](https://apps.apple.com/app/id6532592671)
+
+## Content
+
+The app covers all civics topics tested in the naturalization interview:
+- American Government (principles, system of government, rights and responsibilities)
+- American History (colonial period, 1800s, recent history)
+- Integrated Civics (geography, symbols, holidays)
+
+## Blog
+
+Educational content about U.S. citizenship, civics, and naturalization:
+- [Blog](https://acecitizenship.app/blog)
+
+## Contact
+
+- Website: https://acecitizenship.app
+- Support: https://acecitizenship.app/support
+- Developer: 941 Apps, LLC
+
+---
+
+*Last updated: 2026-01-20*
