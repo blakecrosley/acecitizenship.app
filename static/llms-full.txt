@@ -2,6 +2,8 @@
 
 > Comprehensive U.S. citizenship test preparation platform helping immigrants achieve their American dream
 
+For summary version, see: [llms.txt](https://acecitizenship.app/llms.txt)
+
 ## Product Overview
 
 Ace Citizenship is a freemium iOS app and web platform designed to help aspiring U.S. citizens prepare for the USCIS naturalization interview. The app provides study tools for the official civics questions, English reading/writing practice, and interview preparation guidance.

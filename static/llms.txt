@@ -2,6 +2,8 @@
 
 > U.S. citizenship test preparation app for aspiring Americans
 
+For comprehensive documentation, see: [llms-full.txt](https://acecitizenship.app/llms-full.txt)
+
 ## Overview
 
 Ace Citizenship helps immigrants prepare for the USCIS naturalization interview. Study the official 128 civics questions, practice English reading/writing, and prepare for your interview with confidence.
@@ -38,3 +40,7 @@ During the naturalization interview, applicants answer 10 questions from the off
 - Website: https://acecitizenship.app
 - Developer: 941 Apps
 - Email: blake@941apps.com
+
+---
+
+Last updated: January 2026
