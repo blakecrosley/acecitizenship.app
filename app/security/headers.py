@@ -150,6 +150,19 @@ class SecurityHeadersMiddleware(BaseHTTPMiddleware):
             # Add CORP for static assets (safe since they're self-hosted)
             response.headers["Cross-Origin-Resource-Policy"] = "same-origin"
 
+        # === Early Hints: Link preload for critical resources ===
+        content_type = response.headers.get("content-type", "")
+        if "text/html" in content_type:
+            preload_links = getattr(request.app.state, "preload_links", [])
+            if preload_links:
+                response.headers["Link"] = ", ".join(preload_links)
+
+        # === CDN Cache Safety ===
+
+        # Mutation methods must never be cached at the edge
+        if request.method in ("POST", "PUT", "DELETE", "PATCH"):
+            response.headers["Cache-Control"] = "no-store"
+
         return response
 
 
