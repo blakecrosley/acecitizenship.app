@@ -36,10 +36,21 @@
     {
         "@context": "https://schema.org",
         "@type": "Organization",
+        "@id": "https://acecitizenship.app/#organization",
         "name": "941 Apps, LLC",
         "url": "https://acecitizenship.app",
         "logo": "https://acecitizenship.app/static/images/app-icon.jpg",
-        "description": "U.S. citizenship test preparation app"
+        "description": "U.S. citizenship test preparation app",
+        "parentOrganization": {
+            "@id": "https://941apps.com/#organization"
+        },
+        "founder": {
+            "@id": "https://blakecrosley.com/#person"
+        },
+        "sameAs": [
+            "https://941apps.com",
+            "https://941apps.com/ace-citizenship"
+        ]
     }
     </script>
 
@@ -77,8 +88,13 @@
             "availability": "https://schema.org/InStock"
         },
         "author": {
-            "@type": "Organization",
-            "name": "941 Apps, LLC"
+            "@id": "https://941apps.com/#organization"
+        },
+        "creator": {
+            "@id": "https://blakecrosley.com/#person"
+        },
+        "publisher": {
+            "@id": "https://941apps.com/#organization"
         },
         "url": "https://acecitizenship.app",
         "downloadUrl": "https://apps.apple.com/app/id6532592671",
