@@ -42,9 +42,9 @@ async def blog_index(
     total_pages = (total + POSTS_PER_PAGE - 1) // POSTS_PER_PAGE
 
     response = templates.TemplateResponse(
-        "blog/list.html",
-        {
-            "request": request,
+        request=request,
+        name="blog/list.html",
+        context={
             "posts": posts,
             "page": page,
             "per_page": POSTS_PER_PAGE,
@@ -107,9 +107,9 @@ async def blog_post(request: Request, slug: str, db: Session = Depends(get_db)):
         faq_items = posts_service.extract_faq_items(post.content_html)
 
     response = templates.TemplateResponse(
-        "blog/post.html",
-        {
-            "request": request,
+        request=request,
+        name="blog/post.html",
+        context={
             "post": post,
             "related_posts": related_posts,
             "faq_items": faq_items
