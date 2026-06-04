@@ -1,5 +1,6 @@
 from contextlib import asynccontextmanager
 from fastapi import FastAPI, Request
+from fastapi.responses import PlainTextResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from starlette.middleware.base import BaseHTTPMiddleware
@@ -85,6 +86,16 @@ templates.env.globals["asset"] = lambda path: make_asset_url(_asset_map, path)
 app.state.preload_links = [
     f'<{make_asset_url(_asset_map, "css/custom.css")}>; rel=preload; as=style',
 ]
+
+# IndexNow verification key file (instant URL submission to Bing + IndexNow network)
+INDEXNOW_KEY = "8d2dd7f66c0ef04557322e0f3d0d443b"
+
+
+@app.get(f"/{INDEXNOW_KEY}.txt", response_class=PlainTextResponse)
+async def indexnow_key_file() -> str:
+    """IndexNow ownership-verification key file (https://www.indexnow.org)."""
+    return INDEXNOW_KEY
+
 
 # Include routes
 app.include_router(seo.router)  # SEO routes first (sitemap, robots.txt)
