@@ -1,0 +1,151 @@
+<!-- ============================================================
+     941 Apps family strip — portable cross-property component.
+     Self-contained: own <style>, own squircle clip, root-relative
+     /static/images/family/ assets. No site CSS vars / framework / Jinja
+     globals required.
+
+     To add to a property:
+       1. Copy this file to templates/components/family-strip.html
+       2. Copy the family/ image folder to static/images/family/
+       3. Add the include tag below the footer markup (see README).
+
+     Container width defaults to 1320px (Bootstrap xxl). Override per
+     site with:  .family-strip { --fs-maxw: 1140px; }
+     ============================================================ -->
+<style>
+/* "More from 941 Apps" family strip — portable, self-contained.
+   No dependency on the host site's CSS variables, framework, or fonts.
+   Adapts to light/dark via [data-theme="dark"] (manual-toggle sites) and
+   prefers-color-scheme (auto sites). Inherits the host's text colour. */
+.family-strip { --fs-muted:#6b7280; --fs-border:#e4e4e7; --fs-hover:rgba(0,0,0,.045);
+  padding:56px 0; border-top:1px solid var(--fs-border); }
+[data-theme="dark"] .family-strip { --fs-muted:#9ca3af; --fs-border:#27272a; --fs-hover:rgba(255,255,255,.05); }
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme="light"]) .family-strip { --fs-muted:#9ca3af; --fs-border:#27272a; --fs-hover:rgba(255,255,255,.05); }
+}
+.family-strip__container { max-width:var(--fs-maxw,1320px); margin:0 auto; padding:0 12px; }
+.family-strip__heading { margin:0 0 1.5rem; font-size:.8rem; font-weight:600; line-height:1;
+  text-transform:uppercase; letter-spacing:.05em; color:var(--fs-muted); }
+.family-strip__heading--studio { margin-top:2.5rem; padding-top:2rem; border-top:1px solid var(--fs-border); }
+.family-strip__grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem 2rem; }
+.family-strip__grid--studio { grid-template-columns:repeat(2,minmax(0,1fr)); max-width:720px; }
+@media (max-width:991px) { .family-strip__grid { grid-template-columns:repeat(2,1fr); } }
+@media (max-width:576px) { .family-strip__grid, .family-strip__grid--studio { grid-template-columns:1fr; } }
+.family-strip__lockup { display:flex; align-items:center; gap:.85rem; padding:.75rem; margin:-.75rem 0;
+  border-radius:12px; text-decoration:none; color:inherit; transition:background-color .15s ease; }
+.family-strip__lockup:hover { background-color:var(--fs-hover); }
+.family-strip__lockup img { width:44px; height:44px; flex-shrink:0; object-fit:cover;
+  border-radius:10px; clip-path:url(#family-squircle); }
+.family-strip__text { display:flex; flex-direction:column; min-width:0; }
+.family-strip__title { font-size:.95rem; font-weight:700; line-height:1.35; color:inherit; }
+.family-strip__sub { font-size:.95rem; font-weight:400; line-height:1.35; color:var(--fs-muted); }
+</style>
+<svg width="0" height="0" aria-hidden="true" style="position:absolute">
+    <defs>
+        <clipPath id="family-squircle" clipPathUnits="objectBoundingBox">
+            <path transform="scale(0.0009765625)" d="M1024 651C1024 665.24 1024 679.48 1023.92 693.73C1023.85 705.73 1023.71 717.72 1023.39 729.71C1022.68 755.84 1021.14 782.2 1016.5 808.05C1011.79 834.27 1004.1 858.67 991.97 882.49C980.05 905.9 964.48 927.33 945.9 945.9C927.32 964.47 905.9 980.05 882.49 991.97C858.67 1004.09 834.27 1011.79 808.05 1016.5C782.21 1021.15 755.85 1022.68 729.71 1023.39C717.72 1023.72 705.72 1023.85 693.73 1023.92C679.49 1024.01 665.25 1024 651 1024H373C358.76 1024 344.52 1024 330.27 1023.92C318.27 1023.85 306.28 1023.71 294.29 1023.39C268.16 1022.68 241.8 1021.14 215.95 1016.5C189.73 1011.79 165.33 1004.1 141.51 991.97C118.1 980.05 96.6703 964.48 78.1003 945.9C59.5303 927.32 43.9503 905.9 32.0303 882.49C19.9103 858.67 12.2103 834.27 7.50033 808.05C2.85033 782.21 1.32033 755.85 0.610331 729.71C0.280331 717.72 0.150331 705.72 0.0803306 693.73C-0.00966939 679.49 0.000330575 665.25 0.000330575 651V373C0.000330575 358.76 0.00033062 344.52 0.0803306 330.27C0.150331 318.27 0.290331 306.28 0.610331 294.29C1.32033 268.16 2.86033 241.8 7.50033 215.95C12.2103 189.73 19.9003 165.33 32.0303 141.51C43.9503 118.1 59.5203 96.6703 78.1003 78.1003C96.6803 59.5303 118.1 43.9503 141.51 32.0303C165.33 19.9103 189.73 12.2103 215.95 7.50033C241.79 2.85033 268.15 1.32033 294.29 0.610331C306.28 0.280331 318.28 0.150331 330.27 0.0803306C344.51 -0.00966939 358.75 0.000330575 373 0.000330575H651C665.24 0.000330575 679.48 0.00033062 693.73 0.0803306C705.73 0.150331 717.72 0.290331 729.71 0.610331C755.84 1.32033 782.2 2.86033 808.05 7.50033C834.27 12.2103 858.67 19.9003 882.49 32.0303C905.9 43.9503 927.33 59.5203 945.9 78.1003C964.47 96.6803 980.05 118.1 991.97 141.51C1004.09 165.33 1011.79 189.73 1016.5 215.95C1021.15 241.79 1022.68 268.15 1023.39 294.29C1023.72 306.28 1023.85 318.28 1023.92 330.27C1024.01 344.51 1024 358.75 1024 373V651Z"/>
+        </clipPath>
+    </defs>
+</svg>
+<section class="family-strip" aria-label="More from 941 Apps">
+    <div class="family-strip__container">
+        <h2 class="family-strip__heading">More from 941 Apps</h2>
+        <div class="family-strip__grid">
+            <a class="family-strip__lockup" href="https://resumegeni.com" target="_blank" rel="noopener">
+                <img src="/static/images/family/resumegeni.png" alt="ResumeGeni icon" width="44" height="44" loading="lazy">
+                <span class="family-strip__text">
+                    <span class="family-strip__title">ResumeGeni</span>
+                    <span class="family-strip__sub">AI resume builder for ATS optimization</span>
+                </span>
+            </a>
+            <a class="family-strip__lockup" href="https://acecitizenship.app" target="_blank" rel="noopener">
+                <img src="/static/images/family/ace-citizenship.png" alt="Ace Citizenship icon" width="44" height="44" loading="lazy">
+                <span class="family-strip__text">
+                    <span class="family-strip__title">Ace Citizenship</span>
+                    <span class="family-strip__sub">USCIS test prep with spaced repetition</span>
+                </span>
+            </a>
+            <a class="family-strip__lockup" href="https://941getbananas.com" target="_blank" rel="noopener">
+                <img src="/static/images/family/get-bananas.png" alt="Get Bananas icon" width="44" height="44" loading="lazy">
+                <span class="family-strip__text">
+                    <span class="family-strip__title">Get Bananas</span>
+                    <span class="family-strip__sub">Hand-drawn family shopping list</span>
+                </span>
+            </a>
+            <a class="family-strip__lockup" href="https://941return.com" target="_blank" rel="noopener">
+                <img src="/static/images/family/return.png" alt="Return icon" width="44" height="44" loading="lazy">
+                <span class="family-strip__text">
+                    <span class="family-strip__title">Return</span>
+                    <span class="family-strip__sub">Zen meditation timer for Apple devices</span>
+                </span>
+            </a>
+            <a class="family-strip__lockup" href="https://941ki.com" target="_blank" rel="noopener">
+                <img src="/static/images/family/ki.png" alt="Ki icon" width="44" height="44" loading="lazy">
+                <span class="family-strip__text">
+                    <span class="family-strip__title">Ki</span>
+                    <span class="family-strip__sub">Private iPhone browser</span>
+                </span>
+            </a>
+            <a class="family-strip__lockup" href="https://941apps.com/tappy-color" target="_blank" rel="noopener">
+                <img src="/static/images/family/tappy-color.png" alt="Tappy Color icon" width="44" height="44" loading="lazy">
+                <span class="family-strip__text">
+                    <span class="family-strip__title">Tappy Color</span>
+                    <span class="family-strip__sub">Fast-paced color matching game</span>
+                </span>
+            </a>
+            <a class="family-strip__lockup" href="https://941apps.com/captains-log" target="_blank" rel="noopener">
+                <img src="/static/images/family/captains-log.png" alt="Captain's Log icon" width="44" height="44" loading="lazy">
+                <span class="family-strip__text">
+                    <span class="family-strip__title">Captain's Log</span>
+                    <span class="family-strip__sub">Daily operational journal for builders</span>
+                </span>
+            </a>
+            <a class="family-strip__lockup" href="https://941tiles.com" target="_blank" rel="noopener">
+                <img src="/static/images/family/tile.png" alt="941 Tiles icon" width="44" height="44" loading="lazy">
+                <span class="family-strip__text">
+                    <span class="family-strip__title">941 Tiles</span>
+                    <span class="family-strip__sub">One-click macOS window manager</span>
+                </span>
+            </a>
+            <a class="family-strip__lockup" href="https://941apps.com/learn-materia" target="_blank" rel="noopener">
+                <img src="/static/images/family/learn-materia.png" alt="Learn Materia icon" width="44" height="44" loading="lazy">
+                <span class="family-strip__text">
+                    <span class="family-strip__title">Learn Materia</span>
+                    <span class="family-strip__sub">Print-first kindergarten homework</span>
+                </span>
+            </a>
+            <a class="family-strip__lockup" href="https://941apps.com/reps" target="_blank" rel="noopener">
+                <img src="/static/images/family/reps.png" alt="Reps icon" width="44" height="44" loading="lazy">
+                <span class="family-strip__text">
+                    <span class="family-strip__title">Reps</span>
+                    <span class="family-strip__sub">Strength training on every Apple screen</span>
+                </span>
+            </a>
+            <a class="family-strip__lockup" href="https://941apps.com/cels" target="_blank" rel="noopener">
+                <img src="/static/images/family/cels.png" alt="Cels icon" width="44" height="44" loading="lazy">
+                <span class="family-strip__text">
+                    <span class="family-strip__title">Cels</span>
+                    <span class="family-strip__sub">Floating glass notes for macOS 26</span>
+                </span>
+            </a>
+        </div>
+
+        <h2 class="family-strip__heading family-strip__heading--studio">The studio</h2>
+        <div class="family-strip__grid family-strip__grid--studio">
+            <a class="family-strip__lockup" href="https://941apps.com" target="_blank" rel="publisher">
+                <img src="/static/images/family/941apps-icon.svg" alt="941 Apps icon" width="44" height="44" loading="lazy">
+                <span class="family-strip__text">
+                    <span class="family-strip__title">941 Apps</span>
+                    <span class="family-strip__sub">The studio behind every app above</span>
+                </span>
+            </a>
+            <a class="family-strip__lockup" href="https://blakecrosley.com" target="_blank" rel="author">
+                <img src="/static/images/family/blake-crosley.png" alt="Blake Crosley" width="44" height="44" loading="lazy">
+                <span class="family-strip__text">
+                    <span class="family-strip__title">Blake Crosley</span>
+                    <span class="family-strip__sub">Founder, designer &amp; engineer</span>
+                </span>
+            </a>
+        </div>
+    </div>
+</section>
