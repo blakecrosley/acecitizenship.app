@@ -18,21 +18,30 @@ Privacy posture, which the client mirrors:
 import json
 from datetime import datetime, timezone
 
-from fastapi import APIRouter, Depends, Request
+from fastapi import APIRouter, Depends, HTTPException, Request
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, Field, field_validator
 from sqlalchemy.orm import Session
 
 from app.db.database import get_db
 from app.db.models import TelemetryEvent
+from app.routes.auth import limiter
 
 router = APIRouter(tags=["telemetry"])
 
 # Bounds. The client batches ~10 at a time; anything far past that is either a
 # long offline backlog or someone poking at the endpoint.
+#
+# These are enforced BEFORE the body is parsed (byte cap) and DURING validation
+# (Field constraints), not after. Truncating a parsed model is too late: by then
+# an attacker has already made us allocate whatever they sent.
 MAX_EVENTS_PER_BATCH = 200
 MAX_PROP_KEYS = 20
 MAX_STRING = 128
+
+# A full 200-event batch of bounded events is comfortably under 100 KB. Anything
+# larger is not our client.
+MAX_BODY_BYTES = 256 * 1024
 
 # Only names the app actually sends. An unknown name is dropped rather than
 # stored, so a typo in a future client can't quietly pollute the table.
@@ -49,23 +58,24 @@ ALLOWED_EVENTS = {
 class IncomingEvent(BaseModel):
     name: str = Field(max_length=64)
     at: str = Field(max_length=64)
-    props: dict[str, str] = Field(default_factory=dict)
+    props: dict[str, str] = Field(default_factory=dict, max_length=MAX_PROP_KEYS)
 
     @field_validator("props")
     @classmethod
     def bound_props(cls, v: dict[str, str]) -> dict[str, str]:
-        trimmed = {}
-        for i, (key, value) in enumerate(v.items()):
-            if i >= MAX_PROP_KEYS:
-                break
-            trimmed[str(key)[:MAX_STRING]] = str(value)[:MAX_STRING]
-        return trimmed
+        # Key/value lengths still need clamping — max_length above bounds the
+        # number of keys, not their size.
+        return {str(k)[:MAX_STRING]: str(val)[:MAX_STRING] for k, val in v.items()}
 
 
 class TelemetryBatch(BaseModel):
     install_id: str = Field(max_length=64)
     app_version: str = Field(default="?", max_length=32)
-    events: list[IncomingEvent] = Field(default_factory=list)
+    # Bounded during validation: an oversized batch is rejected (422), not
+    # silently parsed and then trimmed.
+    events: list[IncomingEvent] = Field(
+        default_factory=list, max_length=MAX_EVENTS_PER_BATCH
+    )
 
 
 def _parse_at(value: str) -> datetime:
@@ -79,15 +89,29 @@ def _parse_at(value: str) -> datetime:
 
 
 @router.post("/api/telemetry")
+@limiter.limit("30/minute")
 async def ingest(
-    batch: TelemetryBatch,
     request: Request,
+    batch: TelemetryBatch,
     db: Session = Depends(get_db),
 ):
     """Accept a batch of events. Always 200 on a well-formed body so the client
-    clears its queue; malformed events are dropped, not retried forever."""
-    if len(batch.events) > MAX_EVENTS_PER_BATCH:
-        batch.events = batch.events[:MAX_EVENTS_PER_BATCH]
+    clears its queue; unknown events are dropped, not retried forever.
+
+    This endpoint is unauthenticated by design — the client has no account and
+    no credential to present. That makes it a public, persistent write, so it is
+    bounded on three axes instead: requests per IP (decorator above), body bytes
+    (below), and rows per request (model constraints). A real client sends one
+    small batch every few minutes; 30/minute is far above that and far below
+    anything that could grow the table meaningfully.
+    """
+    content_length = request.headers.get("content-length")
+    if content_length is not None:
+        try:
+            if int(content_length) > MAX_BODY_BYTES:
+                raise HTTPException(status_code=413, detail="Batch too large")
+        except ValueError:
+            raise HTTPException(status_code=400, detail="Bad Content-Length")
 
     stored = 0
     for event in batch.events:
