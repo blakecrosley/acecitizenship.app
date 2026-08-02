@@ -50,5 +50,5 @@ Thumbs.db
 .server.log
 
 # Database
-data/
+/data/
 *.db

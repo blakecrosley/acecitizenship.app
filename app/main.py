@@ -8,7 +8,7 @@ from slowapi import _rate_limit_exceeded_handler
 from slowapi.errors import RateLimitExceeded
 from pathlib import Path
 
-from app.routes import pages, blog, admin, auth, seo, telemetry
+from app.routes import pages, blog, admin, auth, seo, telemetry, officials
 from app.routes.auth import limiter  # Import rate limiter
 from app.db.database import init_db, SessionLocal
 from app.services import posts as posts_service
@@ -104,3 +104,4 @@ app.include_router(blog.router)
 app.include_router(auth.router)
 app.include_router(admin.router)
 app.include_router(telemetry.router)  # iOS product telemetry ingest
+app.include_router(officials.router)  # current officials for the iOS app
