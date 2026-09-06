@@ -1,5 +1,5 @@
 {
-  "version": "2026-09-04",
+  "version": "2026-09-06",
   "federal": {
     "president": "Donald Trump",
     "vice_president": "JD Vance",
@@ -290,7 +290,7 @@
     "Oklahoma": {
       "senators": [
         "James Lankford",
-        "Markwayne Mullin"
+        "Alan Armstrong"
       ],
       "governor": "Kevin Stitt",
       "capital": "Oklahoma City"
@@ -321,7 +321,7 @@
     },
     "South Carolina": {
       "senators": [
-        "Darline Graham Nordone",
+        "Darline Graham",
         "Tim Scott"
       ],
       "governor": "Henry McMaster",
