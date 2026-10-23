@@ -68,7 +68,13 @@ app.add_middleware(SecurityHeadersMiddleware)
 app.add_middleware(RateLimitMiddleware)
 app.add_middleware(SecurityLogMiddleware, site_name="acecitizenship.app")
 # Outermost: rejects direct-to-Railway requests before anything else runs (SEC: origin auth)
-app.add_middleware(OriginAuthMiddleware)
+app.add_middleware(OriginAuthMiddleware, bypass_paths=("/health",))  # /health is the Railway health check
+
+
+@app.get("/health", include_in_schema=False)
+async def health():
+    """Railway health check (bypasses origin auth; no data)."""
+    return {"status": "ok"}
 
 # Static files
 app.mount(
