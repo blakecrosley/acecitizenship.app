@@ -82,7 +82,11 @@ def is_safe_redirect_url(url: str) -> bool:
     Prevents open redirect attacks by only allowing relative URLs
     that start with / and don't contain protocol or netloc.
     """
-    if not url:
+    if not url or "\\" in url or "\x00" in url:
+        return False
+    # Browsers normalise "\\" to "/", so "/\\evil.com" becomes protocol-relative;
+    # reject anything that is not a plain same-origin path.
+    if url.startswith("//"):
         return False
     parsed = urlparse(url)
     # Only allow relative URLs (no scheme or netloc)

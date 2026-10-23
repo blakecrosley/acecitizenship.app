@@ -172,7 +172,7 @@ async def admin_publish_post(
         raise HTTPException(status_code=404, detail="Post not found")
 
     posts_service.publish_post(db, post)
-    return RedirectResponse(url=f"/admin/posts/{post_id}/edit", status_code=303)
+    return RedirectResponse(url=f"/admin/posts/{post.id}/edit", status_code=303)
 
 
 @router.post("/posts/{post_id}/unpublish")
@@ -188,7 +188,7 @@ async def admin_unpublish_post(
         raise HTTPException(status_code=404, detail="Post not found")
 
     posts_service.unpublish_post(db, post)
-    return RedirectResponse(url=f"/admin/posts/{post_id}/edit", status_code=303)
+    return RedirectResponse(url=f"/admin/posts/{post.id}/edit", status_code=303)
 
 
 @router.post("/posts/{post_id}/schedule")
@@ -210,7 +210,7 @@ async def admin_schedule_post(
         raise HTTPException(status_code=400, detail="Invalid date format")
 
     posts_service.schedule_post(db, post, schedule_time)
-    return RedirectResponse(url=f"/admin/posts/{post_id}/edit", status_code=303)
+    return RedirectResponse(url=f"/admin/posts/{post.id}/edit", status_code=303)
 
 
 @router.post("/posts/{post_id}/delete")

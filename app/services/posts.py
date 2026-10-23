@@ -5,6 +5,7 @@ CRUD operations and markdown file sync.
 
 import hashlib
 from datetime import datetime, date
+import re
 from pathlib import Path
 from typing import Optional, Union
 
@@ -387,9 +388,24 @@ def schedule_post(db: Session, post: Post, scheduled_at: datetime) -> Post:
 # MARKDOWN FILE SYNC
 # =============================================================================
 
+_SLUG_FOR_FILE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$")
+
+
+def _content_path_for(slug: str) -> Path:
+    """Markdown path for a post slug, or ValueError. The slug comes from the
+    admin form, so it is validated here (no separators, no empty/dot names)
+    and the resolved path must sit directly inside CONTENT_DIR."""
+    if not slug or not _SLUG_FOR_FILE.fullmatch(slug):
+        raise ValueError(f"unsafe slug for file sync: {slug!r}")
+    path = (CONTENT_DIR / f"{slug}.md").resolve()
+    if path.parent != CONTENT_DIR.resolve():
+        raise ValueError("resolved post path escapes the content directory")
+    return path
+
+
 def sync_post_to_file(post: Post) -> Path:
     """Sync post to markdown file with YAML frontmatter."""
-    file_path = CONTENT_DIR / f"{post.slug}.md"
+    file_path = _content_path_for(post.slug)
 
     metadata = {
         'title': post.title,
